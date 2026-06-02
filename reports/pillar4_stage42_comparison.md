@@ -1,0 +1,22 @@
+# Pillar 4 Stage 4.2 Portfolio Comparison
+
+## Setup
+- Factor source: `data/factor_data/factors_sector_neutral.parquet`.
+- Direction transforms are applied before z-scoring and do not modify raw factor definitions.
+- All composites are re-zscored by date before portfolio formation.
+- All portfolios use top decile long, bottom decile short, daily rebalance, and 1-day lag.
+- Transaction costs are still excluded.
+
+## Comparison Table
+| portfolio | factors | weighting | weights | annualized_return | annualized_sharpe | max_drawdown | average_daily_turnover | hit_rate | average_long_count | average_short_count | n_days |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| baseline_4f_equal_weight | short_term_reversal, idiosyncratic_vol, realized_vol, week_52_high | equal | short_term_reversal=0.2500; idiosyncratic_vol=0.2500; realized_vol=0.2500; week_52_high=0.2500 | 0.14746506209330712 | 0.773378095668468 | -0.30604372333759733 | 0.19629464136798105 | 0.5074681238615665 | 49.84663023679417 | 49.90819672131148 | 2745 |
+| dedup_3f_equal_weight_idio | short_term_reversal, idiosyncratic_vol, week_52_high | equal | short_term_reversal=0.3333; idiosyncratic_vol=0.3333; week_52_high=0.3333 | 0.15273525770950958 | 0.8153859551232646 | -0.3162503270596023 | 0.26030235163298987 | 0.5074681238615665 | 49.84663023679417 | 49.90819672131148 | 2745 |
+| dedup_3f_equal_weight_realized | short_term_reversal, realized_vol, week_52_high | equal | short_term_reversal=0.3333; realized_vol=0.3333; week_52_high=0.3333 | 0.1476777342191704 | 0.747623903049115 | -0.3515329743239851 | 0.25707449966512985 | 0.5041894353369764 | 49.84663023679417 | 49.90819672131148 | 2745 |
+| dedup_3f_fm_weighted_idio | short_term_reversal, idiosyncratic_vol, week_52_high | fm_abs_tstat | short_term_reversal=0.2503; idiosyncratic_vol=0.4153; week_52_high=0.3345 | 0.14765534993656382 | 0.7979757787761371 | -0.2871028836204672 | 0.2131623003061929 | 0.51183970856102 | 49.84663023679417 | 49.90819672131148 | 2745 |
+| dedup_3f_icir_weighted_idio | short_term_reversal, idiosyncratic_vol, week_52_high | icir_abs | short_term_reversal=0.3503; idiosyncratic_vol=0.2707; week_52_high=0.3790 | 0.1498659485049243 | 0.7946102488018096 | -0.33022470744254684 | 0.2733382209805899 | 0.5060109289617486 | 49.84663023679417 | 49.90819672131148 | 2745 |
+
+## Decision
+- Volatility de-duplication: remove `realized_vol` first, because the 3-factor idio Sharpe is 0.815 versus realized-vol Sharpe 0.748.
+- Preferred Stage 4.3 baseline: `dedup_3f_equal_weight_idio` based on the highest Sharpe in this no-cost comparison.
+- Keep equal-weight as the robustness benchmark because research weights are simple historical diagnostics, not optimized live weights.

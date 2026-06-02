@@ -1,0 +1,43 @@
+# Multi-Factor Alpha Platform - Universe Configuration
+# 注意：这里默认使用“当前”的 S&P 500 和 NASDAQ-100 成分股。
+# 这会带来 survivorship bias，因为 2014 年已经退市或被剔除的股票不会出现。
+
+universe:
+  name: "sp500_plus_nasdaq100_current"
+  sources:
+    sp500:
+      enabled: true
+      url: "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
+      table_hint: "constituents"
+    nasdaq100:
+      enabled: true
+      url: "https://en.wikipedia.org/wiki/Nasdaq-100"
+      table_hint: "constituents"
+
+  # 手动加入股票：用于快速扩展 universe，例如加 ADR、ETF 或自选股。
+  manual_include:
+    - "SPY"
+    - "QQQ"
+
+  # 手动移除股票：用于排除数据质量差、不可交易或你暂时不想研究的标的。
+  manual_exclude: []
+
+dates:
+  start: "2014-01-01"
+  end: "2024-12-31"
+
+data:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  price_file: "prices.parquet"
+  fundamental_file: "fundamentals.parquet"
+  daily_fundamental_file: "daily_fundamentals.parquet"
+
+download:
+  retry_count: 3
+  retry_sleep_seconds: 2.0
+  api_sleep_seconds: 0.5
+
+research:
+  fundamental_lag_trading_days: 45
+  random_seed: 42

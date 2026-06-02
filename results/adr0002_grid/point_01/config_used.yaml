@@ -1,0 +1,4 @@
+turnover_penalty: 4.0
+no_trade_band_bps: 100.0
+lambda_beta: 5.0
+sector_net_cap: 0.1

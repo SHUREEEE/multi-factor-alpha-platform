@@ -1,0 +1,7 @@
+factor_1,factor_2,average_rank_correlation,abs_average_rank_correlation,deduplication_flag
+idiosyncratic_vol,realized_vol,0.9166717291011439,0.9166717291011439,True
+realized_vol,week_52_high,0.45221149107511927,0.45221149107511927,False
+short_term_reversal,week_52_high,0.45015924188249473,0.45015924188249473,False
+idiosyncratic_vol,week_52_high,0.41704058544203715,0.41704058544203715,False
+short_term_reversal,realized_vol,0.0051879857551754265,0.0051879857551754265,False
+short_term_reversal,idiosyncratic_vol,-0.0005352806546311099,0.0005352806546311099,False

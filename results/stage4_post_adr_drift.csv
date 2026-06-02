@@ -1,0 +1,18 @@
+metric,pre_value,post_value,abs_diff,rel_diff_pct,materiality_threshold,published_precision_abs_threshold,material_Y_N
+annualized_return,0.0610195470121799,0.06265136997868881,0.0016318229665089057,2.674262668949645,rel_diff_pct > 5% OR abs_diff > published_precision_threshold,0.0005,Y
+annualized_sharpe,0.4911325180889453,0.4979589547477876,0.006826436658842305,1.3899378288786044,rel_diff_pct > 5% OR abs_diff > published_precision_threshold,0.0005,Y
+average_abs_net_beta,3.1445980326916406e-16,0.004484389926783976,0.004484389926783661,inf,rel_diff_pct > 5% OR abs_diff > published_precision_threshold,0.0005,Y
+average_daily_turnover,0.1710949906079515,0.16615861452390351,0.004936376084047983,2.885166927744388,rel_diff_pct > 5% OR abs_diff > published_precision_threshold,0.0005,Y
+average_gross_leverage,1.9559248554913296,1.9559248554913296,0.0,0.0,rel_diff_pct > 5% OR abs_diff > published_precision_threshold,0.0005,N
+average_net_beta,1.1560550981389584e-17,0.002732137831978479,0.0027321378319784674,inf,rel_diff_pct > 5% OR abs_diff > published_precision_threshold,0.0005,Y
+average_sector_concentration_long,0.1962879791456923,0.19630872496147478,2.07458157824858e-05,0.010569070950130613,rel_diff_pct > 5% OR abs_diff > published_precision_threshold,0.0005,N
+average_sector_concentration_short,0.2552680039193978,0.3230105135849656,0.06774250966556777,26.537798950689417,rel_diff_pct > 5% OR abs_diff > published_precision_threshold,0.0005,Y
+hit_rate,0.5086811968969339,0.5072035463612855,0.0014776505356484115,0.29048656499638703,rel_diff_pct > 5% OR abs_diff > published_precision_threshold,0.0005,Y
+large_beta_exposure_days,0.0,0.0,0.0,0.0,rel_diff_pct > 5% OR abs_diff > published_precision_threshold,0.5,N
+long_turnover,0.0614962374824946,0.06052626337482796,0.0009699741076666449,1.5772901682688405,rel_diff_pct > 5% OR abs_diff > published_precision_threshold,0.0005,Y
+max_drawdown,-0.2442149432332118,-0.23855095538806526,0.005663987845146545,2.3192634202313123,rel_diff_pct > 5% OR abs_diff > published_precision_threshold,0.0005,Y
+max_gross_leverage,2.000000000000001,2.000000000000001,0.0,0.0,rel_diff_pct > 5% OR abs_diff > published_precision_threshold,0.0005,N
+n_days,2707.0,2707.0,0.0,0.0,rel_diff_pct > 5% OR abs_diff > published_precision_threshold,0.5,N
+net_cumulative_return,0.8893927043342629,0.9208423332560012,0.031449628921738304,3.5360790310596593,rel_diff_pct > 5% OR abs_diff > published_precision_threshold,0.0005,Y
+realized_beta_to_proxy,0.2156847078573169,0.21909556156710783,0.0034108537097909397,1.5814072975666595,rel_diff_pct > 5% OR abs_diff > published_precision_threshold,0.0005,Y
+short_turnover,0.1097710989477398,0.1058093597901607,0.0039617391575790945,3.609091277718931,rel_diff_pct > 5% OR abs_diff > published_precision_threshold,0.0005,Y

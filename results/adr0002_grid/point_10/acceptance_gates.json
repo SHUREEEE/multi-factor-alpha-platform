@@ -1,0 +1,172 @@
+[
+  {
+    "comparator": ">=",
+    "evidence_path": "results\\adr0002_grid\\point_10\\replay\\v4_diagnostics_panel.parquet",
+    "gate_id": "G-REQ-F-001-tail-turnover",
+    "metric_name": "tail_turnover_reduction",
+    "observed_value": 1.0,
+    "req_id": "REQ-F-001",
+    "status": "PASS",
+    "threshold": 0.75
+  },
+  {
+    "comparator": "<=",
+    "evidence_path": "results\\adr0002_grid\\point_10\\replay\\v4_diagnostics_panel.parquet",
+    "gate_id": "G-REQ-F-001-nonrebal-ratio",
+    "metric_name": "nonrebal_rebal_turnover_ratio",
+    "observed_value": 1.0,
+    "req_id": "REQ-F-001",
+    "status": "PASS",
+    "threshold": 1.5
+  },
+  {
+    "comparator": ">=",
+    "evidence_path": "results\\adr0002_grid\\point_10\\replay\\v4_diagnostics_panel.parquet",
+    "gate_id": "G-REQ-F-001-fullsample-sharpe",
+    "metric_name": "v4_v3_sharpe_ratio",
+    "observed_value": 0.999524229506738,
+    "req_id": "REQ-F-001",
+    "status": "PASS",
+    "threshold": 0.9
+  },
+  {
+    "comparator": ">=",
+    "evidence_path": "results\\adr0002_grid\\point_10\\replay\\v4_diagnostics_panel.parquet",
+    "gate_id": "G-REQ-F-001-2022-shock",
+    "metric_name": "v4_2022_rate_shock_sharpe",
+    "observed_value": 0.9977389692514099,
+    "req_id": "REQ-F-001",
+    "status": "PARTIAL",
+    "threshold": 1.0
+  },
+  {
+    "comparator": "<=",
+    "evidence_path": "results\\adr0002_grid\\point_10\\replay\\v4_diagnostics_panel.parquet",
+    "gate_id": "G-REQ-F-002-sector-p95",
+    "metric_name": "p95_sector_net_max",
+    "observed_value": 0.1,
+    "req_id": "REQ-F-002",
+    "status": "PASS",
+    "threshold": 0.15
+  },
+  {
+    "comparator": "<=",
+    "evidence_path": "results\\adr0002_grid\\point_10\\replay\\v4_diagnostics_panel.parquet",
+    "gate_id": "G-REQ-F-002-sector-avg",
+    "metric_name": "avg_sector_net_vs_v3",
+    "observed_value": 0.09999999999999998,
+    "req_id": "REQ-F-002",
+    "status": "PASS",
+    "threshold": 1.0
+  },
+  {
+    "comparator": ">",
+    "evidence_path": "results\\adr0002_grid\\point_10\\replay\\v4_diagnostics_panel.parquet",
+    "gate_id": "G-REQ-F-003-trend-regime",
+    "metric_name": "trend_down_day_count",
+    "observed_value": 268.0,
+    "req_id": "REQ-F-003",
+    "status": "PASS",
+    "threshold": 0.0
+  },
+  {
+    "comparator": "==",
+    "evidence_path": "results\\adr0002_grid\\point_10\\replay\\v4_diagnostics_panel.parquet",
+    "gate_id": "G-REQ-F-004-beta20-warning",
+    "metric_name": "beta20_monitor_reproducible",
+    "observed_value": 1.0,
+    "req_id": "REQ-F-004",
+    "status": "PASS",
+    "threshold": 1.0
+  },
+  {
+    "comparator": "==",
+    "evidence_path": "results\\adr0002_grid\\point_10\\replay\\v4_diagnostics_panel.parquet",
+    "gate_id": "G-REQ-F-005-beta60-warning",
+    "metric_name": "beta60_monitor_reproducible",
+    "observed_value": 1.0,
+    "req_id": "REQ-F-005",
+    "status": "PASS",
+    "threshold": 1.0
+  },
+  {
+    "comparator": "<=",
+    "evidence_path": "results\\adr0002_grid\\point_10\\replay\\v4_diagnostics_panel.parquet",
+    "gate_id": "G-REQ-F-006-short-top10",
+    "metric_name": "p95_short_top10_concentration",
+    "observed_value": 0.25,
+    "req_id": "REQ-F-006",
+    "status": "PASS",
+    "threshold": 0.25
+  },
+  {
+    "comparator": "<",
+    "evidence_path": "results\\adr0002_grid\\point_10\\replay\\v4_diagnostics_panel.parquet",
+    "gate_id": "G-REQ-F-007-htb-block",
+    "metric_name": "htb_notional_share",
+    "observed_value": 0.0,
+    "req_id": "REQ-F-007",
+    "status": "PASS",
+    "threshold": 0.25
+  },
+  {
+    "comparator": "==",
+    "evidence_path": "results\\adr0002_grid\\point_10\\replay\\v4_diagnostics_panel.parquet",
+    "gate_id": "G-REQ-F-008-halt-tiers",
+    "metric_name": "halt_tiers_reproducible",
+    "observed_value": 1.0,
+    "req_id": "REQ-F-008",
+    "status": "PASS",
+    "threshold": 1.0
+  },
+  {
+    "comparator": "<=",
+    "evidence_path": "results\\adr0002_grid\\point_10\\replay\\v4_diagnostics_panel.parquet",
+    "gate_id": "G-REQ-F-009-participation",
+    "metric_name": "p95_order_participation",
+    "observed_value": 0.005,
+    "req_id": "REQ-F-009",
+    "status": "PASS",
+    "threshold": 0.05
+  },
+  {
+    "comparator": "==",
+    "evidence_path": "results\\adr0002_grid\\point_10\\replay\\v4_diagnostics_panel.parquet",
+    "gate_id": "G-REQ-F-010-var-es",
+    "metric_name": "var_es_coverage",
+    "observed_value": 1.0,
+    "req_id": "REQ-F-010",
+    "status": "PASS",
+    "threshold": 1.0
+  },
+  {
+    "comparator": "==",
+    "evidence_path": "results\\adr0002_grid\\point_10\\replay\\v4_diagnostics_panel.parquet",
+    "gate_id": "G-REQ-F-011-slippage-tail",
+    "metric_name": "slippage_tail_reproducible",
+    "observed_value": 1.0,
+    "req_id": "REQ-F-011",
+    "status": "PASS",
+    "threshold": 1.0
+  },
+  {
+    "comparator": ">=",
+    "evidence_path": "results\\adr0002_grid\\point_10\\replay\\v4_diagnostics_panel.parquet",
+    "gate_id": "G-Preserve-HighVol-Sharpe",
+    "metric_name": "high_vol_sharpe_preservation",
+    "observed_value": 1.3676415148766279,
+    "req_id": "MANDATE",
+    "status": "FAIL",
+    "threshold": 1.4580000000000002
+  },
+  {
+    "comparator": ">=",
+    "evidence_path": "results\\adr0002_grid\\point_10\\replay\\v4_diagnostics_panel.parquet",
+    "gate_id": "G-Preserve-2022-Sharpe",
+    "metric_name": "shock_2022_sharpe_preservation",
+    "observed_value": 0.9977389692514099,
+    "req_id": "MANDATE",
+    "status": "PARTIAL",
+    "threshold": 1.026
+  }
+]

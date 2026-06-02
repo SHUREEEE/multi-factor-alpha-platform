@@ -1,0 +1,22 @@
+{
+  "backtest_dir": "results\\backtest",
+  "weights": "results/pillar5_artifacts/v3_weights.parquet",
+  "factor_data": "data/factor_data/factors.parquet",
+  "returns": "data/processed/prices.parquet",
+  "market_caps": "data/processed/fundamentals.parquet",
+  "market_cap_source": "equal-positive fallback",
+  "sector_map": "data/raw/ticker_sector_map.parquet",
+  "output": "results\\strategy_reports",
+  "start_date": "2014-01-02",
+  "end_date": "2024-12-31",
+  "n_dates": 2768,
+  "n_stocks": 516,
+  "factor_names": [
+    "momentum_12_1",
+    "short_term_reversal",
+    "week_52_high",
+    "idiosyncratic_vol",
+    "beta_inverse",
+    "realized_vol"
+  ]
+}

@@ -1,0 +1,69 @@
+# Pillar 4 candidate factor configuration.
+# Direction is applied in the combination layer so raw factor definitions stay unchanged.
+
+source_factor_file: data/factor_data/factors_sector_neutral.parquet
+price_file: data/processed/prices.parquet
+research_summary_file: results/factor_summary_price_only_sector_neutral_fm.csv
+include_optional_default: true
+
+candidates:
+  - alias: short_term_reversal
+    source_name: short_term_reversal
+    direction: 1
+    optional: false
+    research_transform: none
+
+  - alias: idiosyncratic_vol_high_vol_premium
+    source_name: idiosyncratic_vol
+    direction: -1
+    optional: false
+    research_transform: high_vol_premium
+
+  - alias: realized_vol_high_vol_premium
+    source_name: realized_vol
+    direction: -1
+    optional: false
+    research_transform: high_vol_premium
+
+  - alias: week_52_high_reversal
+    source_name: week_52_high
+    direction: -1
+    optional: true
+    research_transform: reversal
+
+portfolios:
+  baseline_4f_equal_weight:
+    factors:
+      - short_term_reversal
+      - idiosyncratic_vol
+      - realized_vol
+      - week_52_high
+    weighting: equal
+
+  dedup_3f_equal_weight_idio:
+    factors:
+      - short_term_reversal
+      - idiosyncratic_vol
+      - week_52_high
+    weighting: equal
+
+  dedup_3f_equal_weight_realized:
+    factors:
+      - short_term_reversal
+      - realized_vol
+      - week_52_high
+    weighting: equal
+
+  dedup_3f_fm_weighted_idio:
+    factors:
+      - short_term_reversal
+      - idiosyncratic_vol
+      - week_52_high
+    weighting: fm_abs_tstat
+
+  dedup_3f_icir_weighted_idio:
+    factors:
+      - short_term_reversal
+      - idiosyncratic_vol
+      - week_52_high
+    weighting: icir_abs

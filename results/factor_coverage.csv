@@ -1,0 +1,16 @@
+factor_name,non_null_ratio,unique_ticker_coverage,unique_date_coverage,first_valid_date,last_valid_date,status
+beta_inverse,0.9454948861854192,516,2727,2014-03-04,2024-12-31,active
+idiosyncratic_vol,0.9454948861854192,516,2727,2014-03-04,2024-12-31,active
+momentum_12_1,0.8614313079715016,514,2494,2015-02-04,2024-12-31,active
+realized_vol,0.9454948861854192,516,2727,2014-03-04,2024-12-31,active
+short_term_reversal,0.9523590480351302,516,2746,2014-02-04,2024-12-31,active
+week_52_high,0.91478679369987,516,2642,2014-07-03,2024-12-31,active
+accruals,0.0,0,0,,,inactive_empty
+book_to_market,0.0,0,0,,,inactive_empty
+earnings_yield,0.0,0,0,,,inactive_empty
+gross_profitability,0.0,0,0,,,inactive_empty
+log_market_cap,0.0,0,0,,,inactive_empty
+log_revenue,0.0,0,0,,,inactive_empty
+log_total_assets,0.0,0,0,,,inactive_empty
+roe,0.0,0,0,,,inactive_empty
+sales_to_price,0.0,0,0,,,inactive_empty

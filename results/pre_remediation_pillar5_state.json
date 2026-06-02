@@ -1,0 +1,7 @@
+{
+  "max_weight_l1": 0.8974156902094038,
+  "mean_weight_l1": 0.17748805109043567,
+  "n_material_diff_days": 2354,
+  "source": "results/pillar5_stage58_v3_reconciliation.csv",
+  "total_rows": 2768
+}

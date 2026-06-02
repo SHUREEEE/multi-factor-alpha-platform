@@ -1,0 +1,14 @@
+{
+  "cost_config": {
+    "impact_coefficient": 0.1,
+    "linear_bps": 5.0,
+    "use_sqrt_impact": true
+  },
+  "n_dates": 2768,
+  "n_symbols": 516,
+  "prices_path": "data\\processed\\prices.parquet",
+  "prices_sha256": "7e2250a1a65239630a5ea96d6501ca746424b0f207b57fc7f4e3e0c69b8bc32c",
+  "timestamp_utc": "2026-06-01T06:43:49.231805+00:00",
+  "weights_path": "results\\pillar5_artifacts\\v3_weights.parquet",
+  "weights_sha256": "cc90916e3411e78b8c8c385e99f1f7de5f5212108991e6e0d504ff8e1446506a"
+}

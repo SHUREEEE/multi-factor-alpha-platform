@@ -1,0 +1,105 @@
+pillar3 
+
+最重要的发现：FM 揭示了 IC 隐藏的信号
+之前你看 idiosyncratic_vol 和 realized_vol：
+
+IC ≈ 0
+你的判断是"无信号"
+但 FM 告诉你完全不同的故事：
+
+idiosyncratic_vol 的 FM t = -2.55，这是 6 个因子里最显著的结果。
+
+只不过方向是负的——意思是：因子值越高，未来收益越低。
+
+而你的因子定义是 idiosyncratic_vol = -residual_vol，已经加了负号。
+
+所以因子值"高" = 残差波动率"低"。
+
+FM 系数是负的，意思是：残差波动率低的股票，未来收益反而低。
+
+这正好等价于：残差波动率高的股票，未来收益反而高。
+
+这就是 2014-2024 美股大盘股的真实情况：high-vol 跑赢 low-vol，low-volatility premium 在这个 universe 里失效甚至反向。
+
+我上一轮跟你讲的"regime + universe + 缺中性化"的解释，FM 给了你统计显著性证据，t = -2.55 不是噪声，是真的。
+
+
+
+IC 为什么看不出这个信号，但 FM 看出来了
+这是一个值得专门理解的点。
+
+IC（横截面 rank correlation）：
+
+每天算一次相关系数
+然后对所有日期取平均
+平均出来 ≈ 0，因为每天的相关性方向忽正忽负，互相抵消
+Fama-MacBeth：
+
+每天跑一次横截面回归 return ~ factor
+得到每天一个 beta 系数
+对所有 beta 取平均，再用 beta 序列的标准差算 t-stat
+即使每天 beta 很小，但只要长期方向稳定，t-stat 就会显著
+这两个的差别在于：
+
+IC 看的是相关性强度
+FM 看的是系数方向的稳定性
+你的低波动因子是"方向稳定但幅度极小"的典型——每天都是稳稳的小负数，IC 看不出来，FM 看得清清楚楚。
+
+这件事面试可以直接讲，是 quant 研究里非常经典的"IC vs FM 差异"。
+
+
+发现 1：short_term_reversal 是真信号，而且行业中性化让它更干净
+
+LS Sharpe 从 0.47 涨到 0.60
+monotonicity 从 0.81 微降到 0.76（仍然强单调）
+IC 1d 从 0.0053 降到 0.0038，但 5d IC 从 0.013 涨到 0.0084，21d IC 从 0.020 涨到 0.0099
+这说明：
+
+原来的反转信号里混了一些行业层面的噪声
+中性化后，股票特异性的反转信号更纯粹
+这是 6 个因子里唯一一个"行业中性化让信号变强"的因子
+这个因子进 Pillar 4 是板上钉钉的。
+
+发现 2：momentum_12_1 的信号几乎完全来自行业动量
+
+LS Sharpe 从 0.08 跌到 0.006（几乎归零）
+IC 1d 从 0.0124 降到 0.0106（仍然弱正）
+monotonicity 从 -0.12 变成 -0.006（完全无单调性）
+这说明：
+
+原来的 momentum 信号主要是"科技行业整体涨、能源行业整体跌"这种行业层面的趋势
+去掉行业后，股票特异性的 momentum 几乎不存在
+IC 还有一点点正，但 long-short 已经没有经济意义
+这个因子在大盘股 universe 里不可用。
+
+面试讲法：
+
+“Momentum in large-cap US equities is primarily driven by sector rotation rather than stock-specific trends. After sector neutralization, the long-short Sharpe collapsed from 0.08 to near zero, while IC remained weakly positive. This suggests the rank correlation is picking up residual cross-sectional ordering, but the tail spread has no economic significance. This is consistent with the literature: momentum is stronger in small-cap and international markets where arbitrage is less efficient.”
+
+发现 3：三个低波动因子的负 spread 不是行业污染，是真实的 regime 效应
+
+这是最反直觉但也最有价值的发现。
+
+idiosyncratic_vol：LS Sharpe 从 -0.77 变成 -0.85（更负）
+realized_vol：LS Sharpe 从 -0.55 变成 -0.64（更负）
+week_52_high：LS Sharpe 从 -0.59 变成 -0.70（更负）
+如果负 spread 主要来自行业暴露（比如"低波动 = 防御行业，高波动 = 科技行业"），那行业中性化后应该收敛到 0。
+
+但实际上更负了。
+
+这说明什么？
+
+在行业内部，高波动股票也跑赢低波动股票。
+
+换句话说：
+
+不是"科技行业跑赢防御行业"这么简单
+而是"科技行业内部，波动大的科技股跑赢波动小的科技股"
+“防御行业内部，波动大的防御股也跑赢波动小的防御股”
+这是一个跨行业一致的 high-vol premium，是 2014-2024 美股大盘股的真实 regime。
+
+这个发现本身就是一个可以写进 walkthrough 的研究结论。
+
+面试讲法：
+
+“The negative long-short spread in low-volatility factors persisted and even strengthened after sector neutralization. This indicates the high-vol premium is not merely a sector effect — within each sector, higher-volatility stocks outperformed lower-volatility stocks during 2014-2024. This is consistent with the post-2020 regime where growth and momentum dominated, and the traditional low-volatility anomaly failed in large-cap US equities. I documented this as a regime-specific finding rather than treating it as a factor failure.”

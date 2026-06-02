@@ -1,0 +1,16 @@
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.docx binary
+*.xlsx binary
+*.pptx binary
+*.parquet binary
+*.pkl binary
+*.pickle binary
+*.feather binary
+*.h5 binary
+*.hdf5 binary

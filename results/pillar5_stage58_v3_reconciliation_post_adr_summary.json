@@ -1,0 +1,10 @@
+{
+  "accept_max_return_diff": true,
+  "accept_mean_l1": true,
+  "max_return_diff_bps": 0.0,
+  "max_weight_l1": 0.0,
+  "mean_weight_l1": 0.0,
+  "n_fp_noise_days": 0,
+  "n_material_diff_days": 0,
+  "n_true_zero_days": 2768
+}

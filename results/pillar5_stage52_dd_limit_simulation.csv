@@ -1,0 +1,4 @@
+limit_line,threshold,n_triggers,fp_rate,post_trigger_60d_mean_ret,with_derisk_vs_without
+soft_warning,-0.06,45,0.6666666666666666,0.018216581770341307,-0.009046405206127274
+hard_stop_derisk_50,-0.12,18,0.7222222222222222,0.0362030313564518,-0.018160173167446884
+kill_switch,-0.2,0,0.0,,

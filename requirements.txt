@@ -1,0 +1,13 @@
+numpy
+pandas
+pyarrow
+matplotlib
+statsmodels
+PyYAML
+requests
+loguru
+yfinance
+pytest
+
+# Optional: used only by optimizer variants when available.
+cvxpy

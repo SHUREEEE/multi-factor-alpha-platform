@@ -1,0 +1,18 @@
+{
+  "decision": "BLOCKED",
+  "failures": [
+    "P0_READINESS_NOT_READY",
+    "PB_DRY_RUN_MANIFEST_MISSING"
+  ],
+  "gate_counts": {
+    "FAIL": 0,
+    "PARTIAL": 0,
+    "PASS": 17
+  },
+  "p0_not_ready": [
+    "PB borrow real feed"
+  ],
+  "pb_dry_run_manifest": null,
+  "pb_dry_run_status": null,
+  "reason": "P0_READINESS_NOT_READY,PB_DRY_RUN_MANIFEST_MISSING"
+}

@@ -1,0 +1,7 @@
+factor,mean_ic_1d,ic_sign,long_short_mean_return_1d,long_short_sign,monotonicity,monotonicity_sign,directions_consistent,plausible_explanation,automatic_sign_flip_applied
+momentum_12_1,0.012437556291710011,positive,8.220857028328857e-05,positive,-0.11515151515151514,negative,no,Likely weak signal with noisy tails; inspect quantile curve before any sign decision.,no
+short_term_reversal,0.005301698169333942,positive,0.0004071463498977549,positive,0.8060606060606059,positive,yes,"IC, long-short spread, and monotonicity point in the same broad direction.",no
+week_52_high,0.004286704528036571,positive,-0.0006311033151560186,negative,-0.9272727272727272,negative,no,"Likely regime or tail effect: broad rank IC is mildly positive, while extreme high-score stocks underperform low-score stocks.",no
+idiosyncratic_vol,0.0013390537992581898,positive,-0.0006074582917096798,negative,-0.8909090909090909,negative,no,"Likely sector/universe/tail effect: low-vol definitions are correct, but sector tilts and top-decile tails dominate the average spread.",no
+beta_inverse,2.1272789198533126e-05,positive,-0.0004994558533372407,negative,-0.7696969696969697,negative,no,"Likely sector/universe/tail effect: low-vol definitions are correct, but sector tilts and top-decile tails dominate the average spread.",no
+realized_vol,0.0008284649333944219,positive,-0.000587657846290015,negative,-0.9393939393939393,negative,no,"Likely sector/universe/tail effect: low-vol definitions are correct, but sector tilts and top-decile tails dominate the average spread.",no

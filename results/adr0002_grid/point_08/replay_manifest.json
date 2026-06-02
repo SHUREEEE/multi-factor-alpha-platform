@@ -1,0 +1,16 @@
+{
+  "borrow_source": "synthetic",
+  "builder_version": "v4.0.0-D7",
+  "config_hash": "a99d63ed87aa022cdeef4d4f5cb2e6380f105af1a01e81046831b8ec107cf08d",
+  "inputs_hash": "1b9485b435bf5122158cedb6db1caaaf44b69ee480304ef0817397bbaf0de38c",
+  "output_dir": "results\\adr0002_grid\\point_08\\replay",
+  "prior_chain": "t0_prior=v3_weight; t>0_prior=previous_v4_weight",
+  "replay_config": {
+    "lambda_beta": 10.0,
+    "no_trade_band_bps": 100.0,
+    "sector_net_cap": 0.1,
+    "turnover_penalty": 20.0
+  },
+  "replay_timestamp_utc": "2026-05-31T10:47:57Z",
+  "weights_panel_hash": "0a41d2651a766eaf9ab4711ae221f5b40a16548f993b2dff80b16d61599c341f"
+}
