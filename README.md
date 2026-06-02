@@ -1,5 +1,10 @@
 # Multi-Factor Alpha Equity Strategy (US, 2014-2024)
 
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue)](requirements.txt)
+[![Tests](https://img.shields.io/badge/tests-291%20passing-brightgreen)](#quick-start)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Status](https://img.shields.io/badge/status-v1%20research%20complete%2C%20live%20blocked-yellow)](results/v4_launch_go_no_go.json)
+
 ## TL;DR
 
 This project is a complete research pipeline for a multi-factor US equity
@@ -7,6 +12,22 @@ strategy from 2014 to 2024, built end to end from universe construction to
 risk attribution. The headline contribution is not a high-Sharpe number, but a
 fully reproducible pipeline with gross/net attribution, fail-closed reporting,
 and explicit self-criticism through quarantine documentation.
+
+## Visual Overview
+
+```mermaid
+flowchart LR
+  U[Universe] --> D[Data]
+  D --> F[Factors]
+  F --> A[Alpha Combo]
+  A --> P[Portfolio]
+  P --> B[Backtest]
+  B --> R[Attribution]
+
+  P --> C[Costs & Capacity]
+  R --> Q[Quarantine Gate]
+  B --> G[Gross vs Net Diagnostics]
+```
 
 ## Headline Results (Honest)
 
