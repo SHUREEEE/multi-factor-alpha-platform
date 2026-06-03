@@ -18,7 +18,8 @@ implementation drag, block unsupported attribution claims, and show what must
 be fixed before a strategy deserves production language.
 
 For a short reviewer-oriented summary, see
-[`docs/PROJECT_BRIEF.md`](docs/PROJECT_BRIEF.md).
+[`docs/PROJECT_BRIEF.md`](docs/PROJECT_BRIEF.md). For a guided review path,
+see [`docs/REVIEWER_GUIDE.md`](docs/REVIEWER_GUIDE.md).
 
 ## Version Map
 
@@ -74,6 +75,7 @@ and risk attribution is blocked until a real market-cap panel is restored. See
 | P0 blocker | PB borrow real feed | `reports/v4_live_readiness_checklist.md` |
 | Time-split test windows | 6 / 6 positive Sharpe; weakest 2024 Sharpe 0.05 | `results/v4_walk_forward/walk_forward_report.md` |
 | Parameter-selected walk-forward | 5 / 6 positive test Sharpe; weakest 2021 Sharpe -0.04 | `results/v4_walk_forward_selection_full/v4_walk_forward_selection_report.md` |
+| Factor ablation | Dropping `week_52_high` improves no-cost combo Sharpe by 0.07 | `results/factor_ablation/factor_ablation_report.md` |
 
 The v4 layer is a production-engineering candidate, not a live-readiness claim.
 It demonstrates acceptance gates, risk controls, replay manifests, data
@@ -162,8 +164,9 @@ Priority order:
 2. Rerun sqrt(market_cap) WLS attribution without equal-cap fallback.
 3. Run walk-forward and out-of-sample validation so v4 is not judged only on an
    in-sample acceptance grid.
-4. Run leave-one-out factor ablations across the six price factors to identify
-   value-destroying inputs.
+4. Promote the leave-one-out factor ablation into the V4 optimizer loop,
+   especially reviewing `week_52_high`, which improves the no-cost combination
+   Sharpe when removed.
 5. Compare no-trade bands, turnover penalties, and softer neutralization against
    gross-signal preservation and net implementation drag.
 6. Test regime-aware factor weighting, especially around low-volatility,
@@ -208,6 +211,9 @@ To rebuild the daily market-cap panel after restoring real shares outstanding:
 python scripts\build_market_cap_panel.py --fundamentals data\processed\fundamentals.parquet --prices data\processed\prices.parquet --output data\processed\daily_fundamentals.parquet --report data\processed\daily_fundamentals_contract.json --input-format long --lag-days 45
 ```
 
+For the external fundamentals CSV import workflow, see
+`docs/fundamentals_ingestion_guide.md`.
+
 For a smoke test only, the old equal-market-cap path can be run explicitly into
 a separate folder:
 
@@ -240,6 +246,16 @@ python scripts\run_v4_walk_forward_selection.py --v3-cache-dir results\pillar5_a
 This selects v4 parameters on each train window and evaluates only the selected
 configuration on the next test year. It is stronger than a fixed return-stream
 split, but it is still replay-scaffold evidence rather than live alpha proof.
+
+Run the Pillar 4 leave-one-out factor ablation:
+
+```powershell
+python scripts\run_factor_ablation.py --config config\pillar4_candidate_factors.yaml --portfolio baseline_4f_equal_weight --output results\factor_ablation
+```
+
+This is a no-cost combination-layer diagnostic. In the current run, dropping
+`week_52_high` improves Sharpe from 0.77 to 0.84, so that factor should be
+reviewed before promotion into a stronger v2/V4 research loop.
 
 For public release, large binary panels and generated images are intentionally
 excluded from normal Git tracking. See `docs/data_policy.md` for the data and

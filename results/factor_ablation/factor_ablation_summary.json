@@ -1,0 +1,24 @@
+{
+  "config": "config\\pillar4_candidate_factors.yaml",
+  "portfolio": "baseline_4f_equal_weight",
+  "factor_names": [
+    "short_term_reversal",
+    "idiosyncratic_vol",
+    "realized_vol",
+    "week_52_high"
+  ],
+  "full_annualized_sharpe": 0.773378095668468,
+  "full_annualized_return": 0.14746506209330712,
+  "full_average_daily_turnover": 0.19629464136798105,
+  "best_drop_by_sharpe": {
+    "removed_factor": "week_52_high",
+    "delta_sharpe_vs_full": 0.06660624849737706,
+    "annualized_sharpe": 0.8399843441658451
+  },
+  "worst_drop_by_sharpe": {
+    "removed_factor": "short_term_reversal",
+    "delta_sharpe_vs_full": -0.05007603101575109,
+    "annualized_sharpe": 0.723302064652717
+  },
+  "interpretation": "Dropping week_52_high improves the no-cost combination Sharpe, so this factor should be reviewed before promotion."
+}

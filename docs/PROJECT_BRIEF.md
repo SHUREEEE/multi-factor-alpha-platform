@@ -42,9 +42,11 @@ risk attribution, and production-style launch controls.
 | V4 acceptance gates | `reports/v4_acceptance_gate.md` |
 | V4 fixed time-split validation | `results/v4_walk_forward/walk_forward_report.md` |
 | V4 parameter-selected walk-forward | `results/v4_walk_forward_selection_full/v4_walk_forward_selection_report.md` |
+| Factor leave-one-out ablation | `results/factor_ablation/factor_ablation_report.md` |
 | V4 launch handoff | `docs/v4_launch_handoff.md` |
 | Launch go/no-go artifact | `results/v4_launch_go_no_go.json` |
 | Data and artifact policy | `docs/data_policy.md` |
+| Fundamentals ingestion guide | `docs/fundamentals_ingestion_guide.md` |
 | Interview prep | `docs/career/` |
 
 ## v1 Research Findings
@@ -79,6 +81,7 @@ marketing claim.
 | Weakest test window | 2024, Sharpe 0.05 |
 | Parameter-selected test windows | 5 / 6 positive Sharpe |
 | Weakest selected test window | 2021, Sharpe -0.04 |
+| Factor ablation finding | Dropping `week_52_high` improves no-cost combo Sharpe by 0.07 |
 | Launch decision | BLOCKED |
 | Current P0 blocker | Real PB borrow feed |
 
@@ -101,11 +104,13 @@ and a `READY` launch evidence bundle.
 The next highest-value work is:
 
 1. Restore a real daily market-cap and fundamentals panel using the contract in
-   `docs/fundamentals_contract.md`.
+   `docs/fundamentals_contract.md` and the import workflow in
+   `docs/fundamentals_ingestion_guide.md`.
 2. Rerun sqrt(market_cap) WLS attribution without fallback.
 3. Extend `scripts/run_v4_walk_forward_selection.py` from replay-scaffold
    parameter selection into a full retraining walk-forward study.
-4. Run leave-one-out factor ablations.
+4. Promote the leave-one-out factor ablation into the V4 optimizer loop,
+   especially reviewing `week_52_high`.
 5. Compare turnover penalties and no-trade bands against implementation drag.
 6. Wire a real PB borrow feed and rerun the launch evidence bundle.
 

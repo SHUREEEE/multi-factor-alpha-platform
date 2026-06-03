@@ -22,10 +22,12 @@ completed before sending the link in applications.
   and live-launch blocker.
 - `docs/PROJECT_BRIEF.md` can be read in under five minutes and links to the
   most important evidence artifacts.
+- `docs/REVIEWER_GUIDE.md` gives a 30-second, 5-minute, and 15-minute review
+  path.
 - `docs/career/elevator_pitch.md` is consistent with README language and does
   not claim live readiness.
-- V4 acceptance-gate language is presented as local engineering evidence, not
-  out-of-sample proof or a production launch claim.
+- V4 acceptance-gate and walk-forward language is presented as engineering and
+  replay evidence, not a production launch claim.
 
 ## Pre-Send Checks
 

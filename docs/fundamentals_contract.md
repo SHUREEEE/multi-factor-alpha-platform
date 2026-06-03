@@ -6,6 +6,8 @@ Publishable Barra-style attribution requires a positive daily market-cap panel.
 This document defines the minimum data contract for restoring fundamentals
 without weakening the existing fail-closed behavior.
 
+For the external CSV import workflow, see `docs/fundamentals_ingestion_guide.md`.
+
 ## Long Fundamental Input
 
 Raw or processed long-format fundamentals use these columns:
