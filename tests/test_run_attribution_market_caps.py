@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+
 import pandas as pd
 import pytest
 
@@ -56,3 +58,38 @@ def test_load_market_caps_accepts_valid_positive_panel(tmp_path) -> None:
 
     assert source == "numeric panel"
     pd.testing.assert_frame_equal(market_caps, panel)
+
+
+def test_load_market_caps_rejects_invalid_contract_report(tmp_path) -> None:
+    path = tmp_path / "daily_fundamentals.parquet"
+    contract = tmp_path / "daily_fundamentals_contract.json"
+    dates = pd.bdate_range("2024-01-02", periods=1, name="date")
+    index = pd.MultiIndex.from_product([dates, ["A", "B"]], names=["date", "ticker"])
+    pd.DataFrame({"market_cap": [100.0, 200.0]}, index=index).to_parquet(path)
+    contract.write_text(
+        json.dumps(
+            {
+                "valid": False,
+                "violations": ["market_cap positive coverage below contract"],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ValueError, match="Market-cap contract"):
+        _load_market_caps(path, dates, pd.Index(["A", "B"], name="ticker"), contract_path=contract)
+
+
+def test_load_market_caps_accepts_valid_contract_report(tmp_path) -> None:
+    path = tmp_path / "daily_fundamentals.parquet"
+    contract = tmp_path / "daily_fundamentals_contract.json"
+    dates = pd.bdate_range("2024-01-02", periods=1, name="date")
+    tickers = pd.Index(["A", "B"], name="ticker")
+    index = pd.MultiIndex.from_product([dates, tickers], names=["date", "ticker"])
+    pd.DataFrame({"market_cap": [100.0, 200.0]}, index=index).to_parquet(path)
+    contract.write_text(json.dumps({"valid": True, "violations": []}), encoding="utf-8")
+
+    market_caps, source = _load_market_caps(path, dates, tickers, contract_path=contract)
+
+    assert source == "daily fundamentals market_cap column"
+    assert market_caps.loc[pd.Timestamp("2024-01-02"), "A"] == 100.0

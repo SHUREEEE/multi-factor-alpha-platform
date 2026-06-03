@@ -45,3 +45,7 @@ test_acceptance_gates*/
 
 # Generated image outputs
 results/**/*.png
+
+# V4 walk-forward selection keeps top-level review artifacts in Git, while
+# nested per-window replay directories are reproducible intermediate outputs.
+results/v4_walk_forward_selection_full/*/

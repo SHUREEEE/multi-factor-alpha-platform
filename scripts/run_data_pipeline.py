@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from pathlib import Path
 from typing import Any
@@ -16,6 +17,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.data.cleaner import apply_pit_lag, clean_prices, compute_returns, make_daily_fundamentals
+from src.data.fundamentals_contract import validate_daily_fundamentals
 from src.data.downloader import (
     YFinanceDownloader,
     get_nasdaq100_tickers,
@@ -94,14 +96,22 @@ def _run_fundamental_pipeline(
     _save_processed(processed_fundamentals, processed_dir / config["data"]["fundamental_file"])
     daily_fundamentals = make_daily_fundamentals(raw_fundamentals, processed_prices, lag_days=lag_days)
     _save_processed(daily_fundamentals, processed_dir / config["data"]["daily_fundamental_file"])
+    contract_report = validate_daily_fundamentals(daily_fundamentals, price_index=processed_prices.index)
+    _write_contract_report(contract_report.to_dict(), processed_dir / "daily_fundamentals_contract.json")
     logger.info("Processed fundamentals shape: {}", processed_fundamentals.shape)
     logger.info("Daily PIT fundamentals shape: {}", daily_fundamentals.shape)
+    logger.info("Daily PIT fundamentals contract: {}", contract_report.to_dict())
     logger.info("Daily PIT fundamentals head:\n{}", daily_fundamentals.head())
 
 
 def _save_processed(frame: pd.DataFrame, output_path: Path) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     frame.to_parquet(output_path, compression="snappy", index=True)
+
+
+def _write_contract_report(report: dict[str, object], output_path: Path) -> None:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
 
 
 if __name__ == "__main__":

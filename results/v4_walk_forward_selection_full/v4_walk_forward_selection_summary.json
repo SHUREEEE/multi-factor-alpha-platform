@@ -1,0 +1,19 @@
+{
+  "v3_cache_dir": "results\\pillar5_artifacts",
+  "train_years": 5,
+  "test_years": 1,
+  "grid_size": 3,
+  "window_count": 6,
+  "test_sharpe_mean": 0.949052968897611,
+  "test_sharpe_min": -0.04262969532466733,
+  "test_positive_sharpe_ratio": 0.8333333333333334,
+  "selected_points": [
+    "point_02",
+    "point_01",
+    "point_02",
+    "point_01",
+    "point_01",
+    "point_01"
+  ],
+  "interpretation": "Parameter-selected test windows are mixed; inspect weak windows and avoid full-sample claims."
+}

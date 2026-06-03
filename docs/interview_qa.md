@@ -2,17 +2,21 @@
 
 ## Q1: What is the project in one minute?
 
-This is an end-to-end multi-factor US equity research platform covering 2014 to
-2024. It starts with universe and data engineering, builds reusable factor
-definitions, runs factor research, combines selected signals, constructs a
-long-short portfolio, backtests it with T+1 alignment, and attempts Barra-style
-risk attribution. The important point is that v1 is not presented as a
-high-Sharpe strategy. The realized net Sharpe is 0.39, annual return is 4.54%,
-and turnover is 85.6x/year. The contribution is the research discipline: gross
-versus net separation, attribution quarantine, and fail-closed reporting when
-market-cap data is missing. The pipeline surfaces that portfolio construction
-and implementation drag are the binding problems instead of hiding them behind
-an attractive headline metric.
+This is an end-to-end US equity multi-factor research and risk-engineering
+platform covering 2014 to 2024. It starts with universe and data engineering,
+builds reusable factor definitions, runs factor research, combines selected
+signals, constructs a long-short portfolio, backtests it with T+1 alignment,
+and attempts Barra-style risk attribution.
+
+I describe it as two connected tracks. The v1 track is the research diagnosis:
+net Sharpe is 0.39, annual return is 4.54%, and turnover is 85.6x/year, so I do
+not pitch it as investable. The value is that the pipeline identifies
+implementation drag and blocks unsupported attribution claims when market-cap
+data is missing. The v4 track is an engineering candidate: it adds
+turnover-aware construction, acceptance gates, replay evidence, kill-switch
+runbooks, PB borrow-feed boundaries, and a machine-readable launch go/no-go
+guard. V4 passes local acceptance gates, but live launch is still blocked until
+a real PB borrow feed is wired and validated.
 
 ## Q2: Why use a seven-pillar architecture?
 
@@ -205,3 +209,69 @@ about 0.46 cumulative return points. Fourth, I would test regime-aware factor
 weighting so low-volatility signals are not forced into the same allocation in
 growth-led and defensive regimes. The goal is not curve fitting; it is
 identifying which layer actually leaks value.
+
+## Q17: What changed from v1 to v4?
+
+V1 established the research pipeline and diagnosed the first strategy result.
+Its main finding was weak investable value after costs: net Sharpe was 0.39,
+turnover was 85.6x/year, and implementation drag was about 0.46 cumulative
+return points. V4 is the engineering response to that diagnosis. It adds
+turnover-aware construction, risk-budget controls, capacity checks,
+borrow-concentration constraints, drawdown halt logic, data-integrity checks,
+acceptance gates, replay manifests, and launch handoff artifacts.
+
+I would be careful not to overclaim v4. The local acceptance gates pass, and
+the reported full-sample acceptance Sharpe is 1.05. I also added time-split and
+parameter-selection walk-forward diagnostics: the selected-parameter test
+windows are positive in 5 out of 6 years, with mean selected-test Sharpe around
+0.95. But there are weak windows, including a negative 2021 test Sharpe and a
+near-flat 2024 test Sharpe. The correct claim is that v4 is a better engineered
+candidate with encouraging but mixed OOS-style replay evidence, not a live
+strategy.
+
+## Q18: If v4 passes acceptance gates, why is launch still blocked?
+
+Because acceptance gates and live-readiness gates answer different questions.
+The v4 acceptance gates check whether the local replay satisfies requirements
+around turnover, sector exposure, beta monitoring, short concentration,
+participation, VaR/ES, slippage tails, and stress-regime preservation. Those
+are necessary engineering checks, but they do not prove the strategy can be
+launched with real borrow availability.
+
+The current go/no-go artifact is `BLOCKED` because the real PB borrow feed is
+not delivered and validated. Synthetic borrow is acceptable for replay
+evaluation, but not for live short-book readiness. Before using live-readiness
+language, I would require a production PB feed path, schema match, freshness
+SLA, PB-gated dry run, and a `READY` launch evidence bundle.
+
+## Q19: What is the biggest remaining weakness of the public project?
+
+The biggest research weakness is the missing real market-cap and fundamentals
+panel. Without it, I cannot publish proper sqrt(market_cap) weighted
+Barra-style attribution, and I cannot fully validate size, value, or market-cap
+weighted risk-model behavior.
+
+The biggest validation weakness is that v4's current walk-forward evidence is
+still replay-scaffold parameter selection, not a full retraining research loop.
+That is stronger than a full-sample acceptance grid, but it still limits the
+strategy claim. My next research step would be to restore the market-cap panel,
+rerun attribution without fallback, extend the walk-forward into a full
+retraining study, and run leave-one-out factor ablations.
+
+## Q20: How would you package this project differently for a quant researcher,
+quant developer, and risk role?
+
+For a quant researcher, I would emphasize the research controls: factor
+diagnostics, IC and Fama-MacBeth analysis, direction transforms, gross/net
+diagnosis, factor ablation roadmap, and the decision not to hide weak v1
+metrics.
+
+For a quant developer, I would emphasize the engineering surface: modular
+pipeline, command-line workflows, tests, reproducible artifacts, source-of-truth
+cache reconciliation, acceptance gates, launch bundle, and machine-readable
+go/no-go output.
+
+For a risk or portfolio implementation role, I would emphasize attribution
+discipline, implementation drag, turnover-aware construction, sector/beta
+constraints, capacity and borrow controls, drawdown halts, kill-switch runbooks,
+and the refusal to claim launch readiness from Sharpe alone.

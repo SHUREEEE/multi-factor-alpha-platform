@@ -51,6 +51,7 @@ def main() -> None:
         Path(args.market_caps),
         common_dates,
         common_cols,
+        contract_path=Path(args.market_cap_contract) if args.market_cap_contract else None,
         allow_equal_fallback=bool(args.allow_equal_market_cap_fallback),
     )
     industry = pd.get_dummies(sector_map.reindex(common_cols).fillna("Unknown")).astype(float)
@@ -103,6 +104,7 @@ def main() -> None:
         "factor_data": str(args.factor_data),
         "returns": str(args.returns),
         "market_caps": str(args.market_caps),
+        "market_cap_contract": str(args.market_cap_contract) if args.market_cap_contract else None,
         "market_cap_source": market_cap_source,
         "sector_map": str(args.sector_map),
         "output": str(output_dir),
@@ -126,7 +128,8 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--weights", default="results/pillar5_artifacts/v3_weights.parquet")
     parser.add_argument("--factor-data", default="data/factor_data/factors.parquet")
     parser.add_argument("--returns", default="data/processed/prices.parquet")
-    parser.add_argument("--market-caps", default="data/processed/fundamentals.parquet")
+    parser.add_argument("--market-caps", default="data/processed/daily_fundamentals.parquet")
+    parser.add_argument("--market-cap-contract", default="data/processed/daily_fundamentals_contract.json")
     parser.add_argument(
         "--allow-equal-market-cap-fallback",
         action="store_true",
@@ -155,19 +158,23 @@ def _load_market_caps(
     path: Path,
     index: pd.Index,
     columns: pd.Index,
+    contract_path: Path | None = None,
     allow_equal_fallback: bool = False,
 ) -> tuple[pd.DataFrame, str]:
     if path.exists():
         frame = pd.read_parquet(path)
         if not frame.empty:
+            _validate_market_cap_contract(contract_path, allow_equal_fallback=allow_equal_fallback)
             if isinstance(frame.index, pd.MultiIndex) and "market_cap" in frame.columns:
                 panel = frame["market_cap"].unstack("ticker").sort_index()
-                return _validate_market_cap_panel(panel, index, columns, path), "market_cap column"
+                return _validate_market_cap_panel(panel, index, columns, path), "daily fundamentals market_cap column"
             if {"date", "ticker", "market_cap"}.issubset(frame.columns):
                 panel = frame.pivot(index="date", columns="ticker", values="market_cap").sort_index()
-                return _validate_market_cap_panel(panel, index, columns, path), "market_cap column"
+                return _validate_market_cap_panel(panel, index, columns, path), "daily fundamentals market_cap column"
             numeric = frame.select_dtypes(include=[np.number])
             if not numeric.empty and frame.index.nlevels == 1:
+                if contract_path is not None and contract_path.exists() and not allow_equal_fallback:
+                    raise ValueError("Market-cap contract reports apply only to daily fundamentals, not numeric panel fallback.")
                 return _validate_market_cap_panel(numeric, index, columns, path), "numeric panel"
     if not allow_equal_fallback:
         raise ValueError(
@@ -177,6 +184,22 @@ def _load_market_caps(
             "panel, or use --allow-equal-market-cap-fallback only for smoke tests."
         )
     return pd.DataFrame(1.0, index=index, columns=columns), "equal-positive fallback (explicit smoke-test override)"
+
+
+def _validate_market_cap_contract(contract_path: Path | None, allow_equal_fallback: bool = False) -> None:
+    if contract_path is None or allow_equal_fallback:
+        return
+    if not contract_path.exists():
+        return
+    report = json.loads(contract_path.read_text(encoding="utf-8"))
+    if report.get("valid") is True:
+        return
+    violations = report.get("violations") or []
+    violation_text = "; ".join(str(item) for item in violations) if violations else "unknown contract violation"
+    raise ValueError(
+        f"Market-cap contract from {contract_path} is not valid: {violation_text}. "
+        "Rebuild daily fundamentals with scripts/build_market_cap_panel.py before running publishable attribution."
+    )
 
 
 def _validate_market_cap_panel(

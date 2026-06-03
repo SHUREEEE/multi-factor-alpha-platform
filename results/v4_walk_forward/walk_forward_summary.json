@@ -1,0 +1,47 @@
+{
+  "input": "results\\v4_e1_replay\\v4_returns_panel.parquet",
+  "return_column": "daily_return_bps",
+  "train_years": 5,
+  "test_years": 1,
+  "window_count": 6,
+  "overall": {
+    "window_id": "overall",
+    "split": "overall",
+    "start_date": "2014-01-02",
+    "end_date": "2024-12-31",
+    "n_days": 2768,
+    "sharpe": 0.8319780075131065,
+    "annual_return": 0.11004085157397148,
+    "annual_vol": 0.13670507324118972,
+    "max_drawdown": 0.21335312728747313,
+    "hit_rate": 0.5046965317919075
+  },
+  "first_half": {
+    "window_id": "first_half",
+    "split": "diagnostic",
+    "start_date": "2014-01-02",
+    "end_date": "2019-07-03",
+    "n_days": 1385,
+    "sharpe": 0.47879686513353203,
+    "annual_return": 0.04137947577439882,
+    "annual_vol": 0.09388076650119236,
+    "max_drawdown": 0.21335312728747313,
+    "hit_rate": 0.48375451263537905
+  },
+  "second_half": {
+    "window_id": "second_half",
+    "split": "diagnostic",
+    "start_date": "2019-07-05",
+    "end_date": "2024-12-31",
+    "n_days": 1383,
+    "sharpe": 1.0810019599096703,
+    "annual_return": 0.18333854472458255,
+    "annual_vol": 0.16893668309172918,
+    "max_drawdown": 0.20182236647895968,
+    "hit_rate": 0.5256688358640637
+  },
+  "test_sharpe_mean": 0.9864838706048545,
+  "test_sharpe_min": 0.0453623817405167,
+  "test_positive_sharpe_ratio": 1.0,
+  "interpretation": "Test windows are broadly positive, but this is still a time-split diagnostic rather than proof of live alpha."
+}

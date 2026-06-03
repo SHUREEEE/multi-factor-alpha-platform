@@ -1,7 +1,7 @@
 # Resume Bullets
 
 Use one version depending on the role. Keep the project title consistent:
-`Multi-Factor Alpha Equity Strategy Platform`.
+`Multi-Factor Alpha Research & Risk Engineering Platform`.
 
 ## Risk Attribution Version
 
@@ -17,6 +17,12 @@ Use one version depending on the role. Keep the project title consistent:
 - Documented attribution quarantine and narrative pivot decisions through
   ADR-style research records, separating valid diagnostics from unsupported
   production claims.
+- Added a v4 engineering candidate with acceptance gates and a machine-readable
+  launch go/no-go guard, explicitly blocking live-readiness claims until real
+  PB borrow data is validated.
+- Added parameter-selection walk-forward replay diagnostics showing 5/6
+  positive selected-test Sharpe windows while preserving documented weak-window
+  caveats.
 
 ## Quant Developer Version
 
@@ -31,6 +37,10 @@ Use one version depending on the role. Keep the project title consistent:
   and kill-switch runbooks.
 - Prepared a public-repo version with dependency metadata, Git hygiene,
   artifact/data policy, and explicit research limitations for interview review.
+- Organized reviewer-facing documentation around a project brief, version map,
+  evidence artifacts, and explicit v1/v4 readiness boundaries.
+- Implemented CLI validation workflows for market-cap contract checks and V4
+  walk-forward parameter selection, with JSON/CSV/Markdown evidence outputs.
 
 ## Strategy Implementation Version
 
@@ -46,3 +56,7 @@ Use one version depending on the role. Keep the project title consistent:
 - Defined a v2 roadmap with real market-cap restoration, leave-one-out factor
   ablations, no-trade bands, turnover penalties, and regime-aware factor
   weighting.
+- Built a v4 candidate layer that passed local acceptance gates while preserving
+  a hard launch blocker on real PB borrow-feed readiness.
+- Evaluated V4 with train-window parameter selection and next-year test windows,
+  surfacing mixed OOS-style evidence rather than relying on full-sample metrics.

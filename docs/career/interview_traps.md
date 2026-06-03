@@ -18,6 +18,28 @@ factor ablations. For a portfolio project, I think it is more honest to freeze
 the weak result and document the next research step than to keep tuning until
 the backtest looks cleaner.
 
+## V4 has stronger acceptance metrics. Are you now claiming the strategy works?
+
+No. V4 is an engineering candidate, not a finished live alpha claim. The local
+acceptance gates passing is useful evidence that the redesigned construction
+and risk-control layer satisfies the requirements I defined for replay. But it
+is not the same as publishable attribution or live readiness. I added
+parameter-selection walk-forward diagnostics, and those are encouraging but
+mixed: 5 of 6 selected test windows have positive Sharpe, while 2021 is
+negative and 2024 is near flat. I would describe v4 as a better engineered
+candidate with partial OOS-style replay evidence that still needs real
+market-cap attribution, full retraining validation, and PB borrow-feed readiness
+before stronger claims are appropriate.
+
+## If V4 passes 17 gates, why not call it production-ready?
+
+Because one P0 dependency is still external and unresolved: the real PB borrow
+feed. A long-short strategy cannot treat synthetic borrow as live short-book
+readiness. The go/no-go artifact is intentionally `BLOCKED` until a real feed
+is delivered, schema-validated, freshness-monitored, and run through the PB
+dry-run and launch evidence bundle. That is not a cosmetic blocker; it is a
+real production boundary.
+
 ## Your fundamentals file is empty. Why not fake or approximate it?
 
 Because market-cap data is a contract for the attribution claim. If I do not
@@ -36,12 +58,14 @@ gross/net PnL preservation.
 
 ## If you had one week to improve v1, what would you do?
 
-I would focus on Pillar 5. First, add no-trade bands to avoid unnecessary small
-rebalance trades. Second, add a turnover penalty in the optimizer and tune it
-against gross-signal preservation, not just net Sharpe. Third, run leave-one-out
-factor ablations to remove inputs that increase turnover without improving
-gross alpha. After that I would rerun gross/net attribution and compare the
-implementation drag before and after.
+I would make the work evidence-first rather than just tune the backtest. First,
+restore the market-cap panel so attribution can run without fallback. Second,
+run leave-one-out factor ablations to remove inputs that increase turnover
+without improving gross alpha. Third, compare no-trade bands and turnover
+penalties against gross-signal preservation and net implementation drag. If the
+focus is v4 specifically, I would extend the current parameter-selection
+walk-forward into a full retraining study and wire the real PB borrow feed
+through the launch evidence bundle.
 
 ## What questions would you ask the interviewer?
 
