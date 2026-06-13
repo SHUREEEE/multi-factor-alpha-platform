@@ -27,7 +27,7 @@ see [`docs/REVIEWER_GUIDE.md`](docs/REVIEWER_GUIDE.md).
 | --- | --- | --- | --- |
 | v1 research platform | Establish the full seven-pillar research pipeline and diagnose the first strategy result. | Research complete; weak net strategy by design. | `results/backtest/metrics.json`, `reports/pillar6_7_narrative_pivot.md` |
 | v4 engineering candidate | Add turnover-aware construction, risk controls, acceptance gates, replay, and launch guardrails. | Engineering-ready locally; live launch blocked on real PB borrow feed. | `reports/v4_acceptance_gate.md`, `docs/v4_launch_handoff.md`, `results/v4_launch_go_no_go.json` |
-| Public portfolio package | Present the project honestly for interview/review use. | In progress. | `docs/PROJECT_BRIEF.md`, `docs/career/` |
+| Public portfolio package | Present the project honestly for interview/review use. | Resume-ready; GitHub release checklist documented. | `docs/PROJECT_BRIEF.md`, `docs/REVIEWER_GUIDE.md`, `docs/career/` |
 
 ## Visual Overview
 
