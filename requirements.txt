@@ -1,13 +1,13 @@
-numpy
-pandas
-pyarrow
-matplotlib
-statsmodels
-PyYAML
-requests
-loguru
-yfinance
-pytest
+numpy>=1.24,<3.0
+pandas>=2.0,<3.0
+pyarrow>=12.0,<23.0
+matplotlib>=3.7,<4.0
+statsmodels>=0.14,<1.0
+PyYAML>=6.0,<7.0
+requests>=2.31,<3.0
+loguru>=0.7,<1.0
+yfinance>=0.2,<0.3
+pytest>=7.4,<9.0
 
 # Optional: used only by optimizer variants when available.
-cvxpy
+cvxpy>=1.4,<2.0

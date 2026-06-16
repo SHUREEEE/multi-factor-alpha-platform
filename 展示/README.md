@@ -21,22 +21,13 @@ For a short reviewer-oriented summary, see
 [`docs/PROJECT_BRIEF.md`](docs/PROJECT_BRIEF.md). For a guided review path,
 see [`docs/REVIEWER_GUIDE.md`](docs/REVIEWER_GUIDE.md).
 
-## How to Read This Repo (5-Minute Tour)
-
-1. Start with this README's "Headline Results" to understand what v1 actually
-   delivers.
-2. Read `docs/architecture.md` to understand the seven-pillar platform.
-3. Read `reports/pillar6_7_narrative_pivot.md` for the honest v1 framing.
-4. Read `docs/interview_qa.md` for deep-dive answers.
-5. Run the Quick Start to reproduce the local artifacts.
-
 ## Version Map
 
 | Track | Purpose | Status | Key Evidence |
 | --- | --- | --- | --- |
 | v1 research platform | Establish the full seven-pillar research pipeline and diagnose the first strategy result. | Research complete; weak net strategy by design. | `results/backtest/metrics.json`, `reports/pillar6_7_narrative_pivot.md` |
 | v4 engineering candidate | Add turnover-aware construction, risk controls, acceptance gates, replay, and launch guardrails. | Engineering-ready locally; live launch blocked on real PB borrow feed. | `reports/v4_acceptance_gate.md`, `docs/v4_launch_handoff.md`, `results/v4_launch_go_no_go.json` |
-| Public portfolio package | Present the project honestly for interview/review use. | Resume-ready; GitHub release checklist documented. | `docs/PROJECT_BRIEF.md`, `docs/REVIEWER_GUIDE.md`, `docs/career/` |
+| Public portfolio package | Present the project honestly for interview/review use. | In progress. | `docs/PROJECT_BRIEF.md`, `docs/career/` |
 
 ## Visual Overview
 
@@ -53,13 +44,6 @@ flowchart LR
   R --> Q[Quarantine Gate]
   B --> G[Gross vs Net Diagnostics]
 ```
-
-![Gross vs net PnL diagnostic](docs/images/gross_vs_net_pnl.png)
-
-The chart uses the realized net NAV artifact and the published gross terminal
-diagnostic. The gross line is a terminal diagnostic bridge, not a daily gross
-NAV series; it is included to make the implementation drag visible without
-overstating the available artifact.
 
 ## Headline Results (Honest)
 
