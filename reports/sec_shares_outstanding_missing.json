@@ -1,0 +1,134 @@
+{
+  "requested": 516,
+  "downloaded": 480,
+  "missing": [
+    {
+      "ticker": "ABNB",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "APP",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "BF.B",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "BK",
+      "reason": "missing_cik"
+    },
+    {
+      "ticker": "COIN",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "CVNA",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "DASH",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "DDOG",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "DELL",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "EL",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "ERIE",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "EXPE",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "GOOG",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "GOOGL",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "HOOD",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "HRL",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "LEN",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "META",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "MKC",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "MSTR",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "NWS",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "NWSA",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "PDD",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "PLTR",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "QQQ",
+      "reason": "download_failed"
+    },
+    {
+      "ticker": "RL",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "SATS",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "SHOP",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "SPY",
+      "reason": "download_failed"
+    },
+    {
+      "ticker": "STZ",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "TAP",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "TKO",
+      "reason": "missing_shares_outstanding"
+    }
+  ]
+}

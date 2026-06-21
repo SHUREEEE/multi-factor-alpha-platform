@@ -11,8 +11,9 @@ and attempts Barra-style risk attribution.
 I describe it as two connected tracks. The v1 track is the research diagnosis:
 net Sharpe is 0.39, annual return is 4.54%, and turnover is 85.6x/year, so I do
 not pitch it as investable. The value is that the pipeline identifies
-implementation drag and blocks unsupported attribution claims when market-cap
-data is missing. The v4 track is an engineering candidate: it adds
+implementation drag, blocks unsupported attribution claims when market-cap
+coverage is insufficient, and now restores no-fallback Barra attribution for a
+416-name market-cap-ready subset. The v4 track is an engineering candidate: it adds
 turnover-aware construction, acceptance gates, replay evidence, kill-switch
 runbooks, PB borrow-feed boundaries, and a machine-readable launch go/no-go
 guard. V4 passes local acceptance gates, but live launch is still blocked until
@@ -37,12 +38,14 @@ The backtest uses a strict T+1 convention. Signals and target weights decided
 at date T earn returns from T+1 onward, so weights are shifted before being
 multiplied by returns. Price-based factors use only historical adjusted close
 and rolling windows. Fundamental inputs are designed to use point-in-time lagged
-available dates, although the current local fundamentals file is empty. Tests
-cover the shift behavior directly: a weight introduced on day two cannot earn
-the same day's return. The project also avoids silently filling missing factor
-or market-cap data in ways that would create false precision. The risk
-attribution now refuses to run without usable market caps rather than creating
-a misleading Barra claim.
+available dates. The current price-only research path is fully reproducible,
+while full-universe market-cap and fundamentals attribution remains
+coverage-gated. Tests cover the shift behavior directly: a weight introduced on
+day two cannot earn the same day's return. The project also avoids silently
+filling missing factor or market-cap data in ways that would create false
+precision. The risk attribution refuses to run without usable market caps
+rather than creating a misleading Barra claim, and the restored 416-name subset
+attribution uses real market-cap inputs rather than equal-cap fallback.
 
 ## Q4: Why use adjusted close instead of close?
 
@@ -60,12 +63,14 @@ model cannot rescue a return stream polluted by corporate-action artifacts.
 
 The initial library includes common equity styles: momentum, reversal,
 52-week-high, idiosyncratic volatility, beta inverse, realized volatility, and
-fundamental value/quality/size factors where data exists. Because local
-fundamentals are empty, the active v1 portfolio is price-factor driven. Earlier
-research found short-term reversal to be the cleanest standalone signal, while
-several low-volatility signals behaved opposite to their textbook direction in
-this 2014-2024 large-cap US sample. Pillar 4 records direction transforms
-separately from raw factor definitions so the research decision is auditable:
+fundamental value/quality/size factors where data exists. Because the
+full-universe fundamentals panel is incomplete, the active v1 portfolio is
+price-factor driven, while the market-cap-ready subset is used for no-fallback
+risk attribution. Earlier research found short-term reversal to be the cleanest
+standalone signal, while several low-volatility signals behaved opposite to
+their textbook direction in this 2014-2024 large-cap US sample. Pillar 4
+records direction transforms separately from raw factor definitions so the
+research decision is auditable:
 raw signals remain economically interpretable, while the combination layer can
 use empirically validated signs.
 
@@ -140,11 +145,12 @@ regressions of stock returns on factor exposures and industry controls. The
 intended Barra-style feature is sqrt(market_cap) weighted least squares, which
 gives larger, more liquid names more influence in the cross-section. Portfolio
 factor exposure times factor return gives factor contribution, and the
-residual is pure alpha before costs. The current workspace cannot publish this
-as a valid Barra attribution because the market-cap panel is missing. The
-script now fails closed unless positive market caps cover the fitted universe.
-An explicit equal-cap fallback exists only for smoke tests and is labeled as
-such.
+residual is pure alpha before costs. The full 516-name workspace cannot publish
+full-universe Barra attribution because market-cap coverage remains below the
+contract. The script fails closed unless positive market caps cover the fitted
+universe. A 416-name market-cap-ready subset now passes the contract and runs
+without fallback. An explicit equal-cap fallback exists only for smoke tests
+and is labeled as such.
 
 ## Q12: Why is sqrt(market_cap) weighting important?
 
@@ -153,10 +159,11 @@ market-cap weighting. It makes the regression more representative of the
 investable market without letting the largest names completely dominate the
 fit. In a Barra-style model, this matters because factor returns should reflect
 the behavior of economically meaningful cross-sectional exposures, not just the
-average behavior of many tiny or illiquid names. That is why the missing
-market-cap panel is a blocking issue. If the model silently uses equal-positive
-fallback, the regression becomes much closer to ordinary least squares, and the
-"Barra-style" claim becomes misleading. v1 now prevents that by default.
+average behavior of many tiny or illiquid names. That is why insufficient
+market-cap coverage is a blocking issue. If the model silently uses
+equal-positive fallback, the regression becomes much closer to ordinary least
+squares, and the "Barra-style" claim becomes misleading. v1 now prevents that
+by default, and the market-cap-ready subset uses real market caps.
 
 ## Q13: Why quarantine the attribution instead of deleting it?
 
@@ -188,19 +195,22 @@ be redesigned before the signal can be investable.
 Yes, for v1 that is the right interpretation. The quarantined smoke attribution
 shows negative pure alpha after costs, meaning the six-factor portfolio's
 return is explained by public factor exposure while portfolio construction and
-implementation subtract value. I would be careful, though: the formal
-Barra-style attribution is quarantined because the market-cap panel is missing,
-so I would not publish the exact pure-alpha number as a final risk-model
-result. The broader finding is still useful. Attribution frameworks exist to
-surface exactly this kind of problem: the value-add was not where I initially
-thought it was. v2 should restore proper market caps, rerun attribution, ablate
-the factors, and reduce neutralization intensity.
+implementation subtract value. I would be careful, though: full-universe
+Barra-style attribution is still coverage-gated because the complete
+market-cap panel is not available. I would use the 416-name restored subset for
+publishable no-fallback attribution and avoid presenting it as full-universe
+attribution. The broader finding is still useful. Attribution frameworks exist
+to surface exactly this kind of problem: the value-add was not where I
+initially thought it was. v2 should continue with factor ablation and reduced
+neutralization intensity.
 
 ## Q16: Walk me through how you would fix this in v2.
 
-First, I would restore a real daily market-cap panel, ideally from shares
-outstanding times adjusted price, and rerun sqrt(market_cap) weighted
-attribution without fallback. Second, I would run leave-one-out ablations over
+First, I restored a real daily market-cap path from SEC shares outstanding
+times adjusted price and reran sqrt(market_cap) weighted attribution without
+fallback on a market-cap-ready subset. Next, I would add a more complete
+historical fundamentals vendor so the full universe clears the same contract.
+Second, I would run leave-one-out ablations over
 the six active price factors to find which inputs are value-destroying,
 especially idiosyncratic volatility, realized volatility, and 52-week-high
 exposure. Third, I would reduce Pillar 5 neutralization intensity with
@@ -246,17 +256,18 @@ SLA, PB-gated dry run, and a `READY` launch evidence bundle.
 
 ## Q19: What is the biggest remaining weakness of the public project?
 
-The biggest research weakness is the missing real market-cap and fundamentals
-panel. Without it, I cannot publish proper sqrt(market_cap) weighted
-Barra-style attribution, and I cannot fully validate size, value, or market-cap
-weighted risk-model behavior.
+The biggest remaining research weakness is full-universe fundamentals
+coverage. The project now has real-market-cap attribution for a 416-name
+subset, but the full 516-name universe still needs a more complete historical
+fundamentals vendor before I would call full-universe Barra attribution
+publishable.
 
 The biggest validation weakness is that v4's current walk-forward evidence is
 still replay-scaffold parameter selection, not a full retraining research loop.
 That is stronger than a full-sample acceptance grid, but it still limits the
-strategy claim. My next research step would be to restore the market-cap panel,
-rerun attribution without fallback, extend the walk-forward into a full
-retraining study, and run leave-one-out factor ablations.
+strategy claim. My next research step would be to extend the walk-forward into
+a full retraining study, add full-universe fundamentals coverage, and run
+leave-one-out factor ablations.
 
 ## Q20: How would you package this project differently for a quant researcher,
 quant developer, and risk role?

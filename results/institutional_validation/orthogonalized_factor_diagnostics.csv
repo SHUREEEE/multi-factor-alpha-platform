@@ -1,0 +1,7 @@
+factor_name,raw_ic_mean_1d,raw_ic_tstat_1d,orthogonalized_ic_mean_1d,orthogonalized_ic_tstat_1d,orthogonalized_ic_retention,controls
+momentum_12_1,0.012437556291710016,2.737786049514107,0.009737118872895493,4.257934760911946,0.782880386188528,"short_term_reversal,week_52_high,idiosyncratic_vol,beta_inverse,realized_vol"
+short_term_reversal,0.005301698169333939,1.5914289233052161,0.0004632502106166125,0.22631757825510468,0.08737770348680778,"momentum_12_1,week_52_high,idiosyncratic_vol,beta_inverse,realized_vol"
+week_52_high,0.004286704528036569,0.9815456357865127,0.0007711748177724436,0.41465719690669817,0.1798992239210066,"momentum_12_1,short_term_reversal,idiosyncratic_vol,beta_inverse,realized_vol"
+idiosyncratic_vol,0.0013390537992581909,0.41468142633856203,0.0013651820716087204,0.8225684184184999,1.0195124888671419,"momentum_12_1,short_term_reversal,week_52_high,beta_inverse,realized_vol"
+beta_inverse,2.127278919853383e-05,0.004001799318361145,0.0018566278930673822,0.9784336507291493,,"momentum_12_1,short_term_reversal,week_52_high,idiosyncratic_vol,realized_vol"
+realized_vol,0.000828464933394419,0.18090686926167893,-0.0009161166082237738,-0.5472348791953799,,"momentum_12_1,short_term_reversal,week_52_high,idiosyncratic_vol,beta_inverse"

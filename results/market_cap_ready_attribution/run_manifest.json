@@ -1,0 +1,28 @@
+{
+  "source_weights": "results\\pillar5_artifacts\\v3_weights.parquet",
+  "source_prices": "data\\processed\\prices.parquet",
+  "source_factors": "data\\factor_data\\factors.parquet",
+  "source_daily_fundamentals": "data\\processed\\daily_fundamentals.parquet",
+  "eligible_ticker_count": 416,
+  "dropped_ticker_count": 100,
+  "min_ticker_coverage": 0.99,
+  "min_daily_coverage": 0.95,
+  "contract": {
+    "valid": true,
+    "row_count": 1151488,
+    "ticker_count": 416,
+    "start_date": "2014-01-02",
+    "end_date": "2024-12-31",
+    "columns": [
+      "shares_outstanding",
+      "market_cap"
+    ],
+    "required_columns": [
+      "market_cap"
+    ],
+    "missing_columns": [],
+    "market_cap_min_positive_coverage": 1.0,
+    "market_cap_mean_positive_coverage": 1.0,
+    "violations": []
+  }
+}

@@ -35,26 +35,15 @@ see [`docs/REVIEWER_GUIDE.md`](docs/REVIEWER_GUIDE.md).
 | Track | Purpose | Status | Key Evidence |
 | --- | --- | --- | --- |
 | v1 research platform | Establish the full seven-pillar research pipeline and diagnose the first strategy result. | Research complete; weak net strategy by design. | `results/backtest/metrics.json`, `reports/pillar6_7_narrative_pivot.md` |
+| v2 institutional validation pack | Add institutional-style factor diagnostics, OOS validation, regime splits, factor interaction, and capacity evidence. | Implemented as a reproducible validation pack; not a live-readiness claim. | `config/institutional_validation.yaml`, `scripts/run_institutional_validation.py` |
 | v4 engineering candidate | Add turnover-aware construction, risk controls, acceptance gates, replay, and launch guardrails. | Engineering-ready locally; live launch blocked on real PB borrow feed. | `reports/v4_acceptance_gate.md`, `docs/v4_launch_handoff.md`, `results/v4_launch_go_no_go.json` |
 | Public portfolio package | Present the project honestly for interview/review use. | Resume-ready; GitHub release checklist documented. | `docs/PROJECT_BRIEF.md`, `docs/REVIEWER_GUIDE.md`, `docs/career/` |
 
 ## Visual Overview
 
-```mermaid
-flowchart LR
-  U[Universe] --> D[Data]
-  D --> F[Factors]
-  F --> A[Alpha Combo]
-  A --> P[Portfolio]
-  P --> B[Backtest]
-  B --> R[Attribution]
+![Seven-pillar research and risk engineering flow](docs/images/research_pipeline.svg)
 
-  P --> C[Costs & Capacity]
-  R --> Q[Quarantine Gate]
-  B --> G[Gross vs Net Diagnostics]
-```
-
-![Gross vs net PnL diagnostic](docs/images/gross_vs_net_pnl.png)
+![Gross vs net PnL diagnostic](./docs/images/gross_vs_net_pnl.png)
 
 The chart uses the realized net NAV artifact and the published gross terminal
 diagnostic. The gross line is a terminal diagnostic bridge, not a daily gross
@@ -73,12 +62,14 @@ overstating the available artifact.
 | Max Drawdown | -26.19% | `results/backtest/metrics.json` |
 | Annual Turnover | 85.6x/year | `results/backtest/metrics.json` |
 | Implementation Drag | 0.46 | gross PnL minus net PnL |
-| Pure Alpha (Barra-style attribution) | QUARANTINED | `reports/pillar6_7_attribution_quarantine.md` |
+| Pure Alpha (Barra-style attribution) | Restored for 416-name market-cap-ready subset; full 516-name universe still records coverage gap. | `reports/market_cap_attribution_restoration.md` |
 
 The v1 result is intentionally presented as a weak strategy with a strong
 diagnostic trail. Net Sharpe is below the sanity range, turnover is too high,
-and risk attribution is blocked until a real market-cap panel is restored. See
-`reports/pillar6_7_narrative_pivot.md` for the decision record.
+and full-universe risk attribution remains blocked until a complete historical
+market-cap panel is available. A real-market-cap attribution path has been
+restored for a 416-name market-cap-ready subset; see
+`reports/market_cap_attribution_restoration.md`.
 
 ### v4 Engineering Candidate
 
@@ -122,7 +113,7 @@ validated, and passed through the dry-run evidence bundle.
 | 4 | Alpha Combination | DONE |
 | 5 | Portfolio Construction | DONE |
 | 6 | Backtest Engine | DONE (self-critical result) |
-| 7 | Risk Model & Attribution | DONE (quarantined until market-cap data is restored) |
+| 7 | Risk Model & Attribution | DONE; full-universe attribution remains coverage-gated, market-cap-ready subset restored |
 
 **Pillar 1: Universe Construction**  
 Defines the US equity research universe and supporting metadata used throughout
@@ -131,8 +122,10 @@ than an unexamined symbol list.
 
 **Pillar 2: Data Engineering**  
 Builds cleaned price, fundamentals, and classification inputs. The current
-workspace has usable price data but an empty fundamentals file, which is why
-Barra-style attribution is blocked.
+workspace has usable price data and SEC shares-outstanding coverage sufficient
+for a 416-name market-cap-ready attribution subset. The full 516-name universe
+still remains coverage-gated until a more complete historical fundamentals
+vendor is added.
 
 **Pillar 3: Factor Library**  
 Implements price, value, quality, low-volatility, and size factor modules with
@@ -153,8 +146,9 @@ reports the current weak-but-real net metrics.
 
 **Pillar 7: Risk Model & Attribution**  
 Implements Barra-style cross-sectional factor attribution and tearsheet
-generation. It now fails closed without a positive market-cap panel, so the old
-equal-fallback attribution is quarantined.
+generation. It fails closed without a positive market-cap panel. The old
+equal-fallback attribution remains quarantined, while a real-market-cap
+attribution run is restored for the 416-name market-cap-ready subset.
 
 See `docs/architecture.md` for a more detailed narrative walkthrough.
 
@@ -164,30 +158,80 @@ See `docs/architecture.md` for a more detailed narrative walkthrough.
   backtest -> attribution.
 - Engineering discipline: ADR-driven changes, PIT audit, source-of-truth cache
   reconciliation, kill switch runbook, and pre-launch acceptance gates.
-- Attribution discipline: gross/net separation, Barra-style WLS design, and
-  fail-closed reporting when required inputs are absent.
+- Attribution discipline: gross/net separation, Barra-style WLS design,
+  fail-closed reporting when required inputs are absent, and a restored
+  no-fallback market-cap-ready attribution subset.
 - Research honesty: quarantine documentation, narrative pivot record, and an
   explicit v2 plan instead of a fabricated hero metric.
 
 Interview preparation notes are in `docs/interview_qa.md`.
 
-## Roadmap (v2)
+## v2 Institutional Validation Pack
 
-Priority order:
+The v2 validation pack upgrades the research evidence layer without claiming
+that the strategy is production-ready. It adds multi-horizon IC decay, HAC
+significance tests, FDR-adjusted p-values, factor turnover, full quantile
+portfolio return artifacts, quantile regime diagnostics, return-stream and
+train-locked factor out-of-sample windows, factor correlation/PCA diagnostics,
+rolling factor correlations, orthogonalized factor tests, exposure/risk
+decomposition, feature-importance ranking, and capacity/impact scenarios.
 
-1. Restore a daily market-cap and fundamentals panel from real shares
-   outstanding, adjusted prices, and point-in-time fundamental fields.
-2. Rerun sqrt(market_cap) WLS attribution without equal-cap fallback.
-3. Run walk-forward and out-of-sample validation so v4 is not judged only on an
-   in-sample acceptance grid.
-4. Promote the leave-one-out factor ablation into the V4 optimizer loop,
+Run it with:
+
+```powershell
+python scripts\run_institutional_validation.py --config config\institutional_validation.yaml
+```
+
+Primary outputs are written under `results/institutional_validation/`, with the
+human-readable report at `reports/institutional_validation.md`. Key artifacts
+include `factor_validation_summary.csv`, `quantile_portfolio_returns.csv`,
+`locked_factor_oos_windows.csv`, `orthogonalized_factor_diagnostics.csv`,
+`rolling_factor_correlations.csv`, `factor_exposure_timeseries.csv`,
+`risk_decomposition_summary.csv`, `feature_importance.csv`, and
+`capacity_impact_grid.csv`. The price-only path is the default, and
+fundamentals-dependent attribution remains fail-closed when market-cap/fundamental
+data is missing.
+
+## Market-Cap Attribution Restoration
+
+The project now includes a publishable attribution path that restores real
+market-cap inputs without disabling fail-closed controls:
+
+```powershell
+python scripts\download_sec_shares_outstanding.py --tickers data\processed\prices.parquet
+python scripts\build_market_cap_panel.py --fundamentals data\raw\sec_shares_outstanding.parquet --prices data\processed\prices.parquet --output data\processed\daily_fundamentals.parquet --report data\processed\daily_fundamentals_contract.json --input-format long --lag-days 45
+python scripts\build_market_cap_ready_attribution_inputs.py
+python scripts\run_attribution.py --backtest-dir results\market_cap_ready_attribution\backtest --weights results\market_cap_ready_attribution\weights.parquet --factor-data results\market_cap_ready_attribution\factors.parquet --returns results\market_cap_ready_attribution\prices.parquet --market-caps results\market_cap_ready_attribution\daily_fundamentals.parquet --market-cap-contract results\market_cap_ready_attribution\daily_fundamentals_contract.json --output results\market_cap_ready_attribution\strategy_reports
+```
+
+The full 516-name research universe still records the raw SEC coverage gap, but
+the market-cap-ready attribution subset contains 416 tickers with 100% positive
+daily market-cap coverage from 2014-01-02 to 2024-12-31. The attribution run
+uses the real `market_cap` column and does not use equal-market-cap fallback.
+
+## Roadmap
+
+Completed v2 upgrades:
+
+1. Restored real SEC shares-outstanding inputs and daily `market_cap` artifacts.
+2. Reran sqrt(market_cap) WLS attribution without equal-cap fallback on the
+   416-name market-cap-ready subset.
+3. Extended the v2 validation pack with institutional factor diagnostics,
+   train-locked OOS validation, regime analysis, factor interaction, exposure,
+   capacity, risk, and feature-importance artifacts.
+
+Remaining priority order:
+
+1. Add a more complete historical fundamentals vendor to lift the full
+   516-name universe above the 95% daily market-cap coverage contract.
+2. Promote the leave-one-out factor ablation into the V4 optimizer loop,
    especially reviewing `week_52_high`, which improves the no-cost combination
    Sharpe when removed.
-5. Compare no-trade bands, turnover penalties, and softer neutralization against
+3. Compare no-trade bands, turnover penalties, and softer neutralization against
    gross-signal preservation and net implementation drag.
-6. Test regime-aware factor weighting, especially around low-volatility,
+4. Test regime-aware factor weighting, especially around low-volatility,
    reversal, and 52-week-high exposure.
-7. Wire a real PB borrow feed, rerun the PB-gated dry run, and require a
+5. Wire a real PB borrow feed, rerun the PB-gated dry run, and require a
    `READY` launch bundle before using live-readiness language.
 
 ## Quick Start

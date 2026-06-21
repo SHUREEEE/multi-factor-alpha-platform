@@ -46,6 +46,15 @@ test_acceptance_gates*/
 # Generated image outputs
 results/**/*.png
 
+# Generated v2 institutional validation and attribution bundles.
+# Commit Markdown reports and small JSON/CSV evidence intentionally; keep
+# reproducible large panels out of normal Git history.
+data/raw/sec_shares_outstanding.parquet
+data/processed/daily_fundamentals.parquet
+results/institutional_validation/*.parquet
+results/market_cap_ready_attribution/**/*.parquet
+results/market_cap_ready_attribution/**/*.png
+
 # V4 walk-forward selection keeps top-level review artifacts in Git, while
 # nested per-window replay directories are reproducible intermediate outputs.
 results/v4_walk_forward_selection_full/*/

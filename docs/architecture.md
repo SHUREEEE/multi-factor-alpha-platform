@@ -23,9 +23,11 @@ so the report refuses to publish a Barra-style claim.
 The first two pillars define the research sample and the data contract. Price
 data is available in `data/processed/prices.parquet`, including adjusted close
 and daily returns. Fundamental data is designed to be point-in-time lagged, but
-the current local fundamentals file is empty. That missing data is not a minor
-detail: market capitalization is required for both size/value factors and
-sqrt(market_cap) weighted risk-model regressions.
+the full-universe fundamentals panel remains coverage-gated. That missing
+full-universe coverage is not a minor detail: market capitalization is required
+for both size/value factors and sqrt(market_cap) weighted risk-model
+regressions. A 416-name market-cap-ready attribution subset now restores the
+real-market-cap path without using equal-cap fallback.
 
 The data layer therefore has two roles. It provides usable price inputs for the
 active v1 strategy, and it explicitly blocks claims that require unavailable
@@ -91,12 +93,15 @@ returns into factor contribution, pure alpha, and implementation cost. The
 intended model is Barra-style weighted least squares with sqrt(market_cap)
 weights and industry controls.
 
-The current workspace cannot publish this attribution because the market-cap
-panel is missing. Earlier artifacts used equal-positive fallback, which would
+The full 516-name workspace cannot publish full-universe attribution because
+the market-cap coverage contract is not met. Earlier artifacts used
+equal-positive fallback, which would
 turn the regression into something much closer to ordinary least squares while
 still looking like a Barra report. The script now prevents that by default. A
 smoke-test override exists only for testing the reporting path, and its output
-is not a publishable attribution.
+is not a publishable attribution. The restored publishable path is the
+416-name market-cap-ready subset documented in
+`reports/market_cap_attribution_restoration.md`.
 
 ## Extended Engineering Layer
 

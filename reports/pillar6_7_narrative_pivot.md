@@ -48,8 +48,11 @@ Using the quarantined equal-market-cap smoke attribution, pure alpha is negative
 when costs are included: -92% of net return. The interpretation is that the
 six-factor combination's return is explained by factor exposure itself, while
 the portfolio construction layer subtracts value through high turnover and
-aggressive neutralization. Because the market-cap panel is missing, this result
-is treated as a diagnostic finding, not as a publishable Barra attribution.
+aggressive neutralization. At the time of this v1 diagnostic, the market-cap
+panel was missing, so this result was treated as a diagnostic finding, not as a
+publishable Barra attribution. The later v2 restoration keeps this historical
+quarantine intact while adding a separate 416-name market-cap-ready subset with
+real market-cap inputs and no equal-cap fallback.
 
 ### Finding 3: Fail-closed reporting prevented a bad claim
 
@@ -61,8 +64,9 @@ report does not get published.
 
 ## v2 Research Plan
 
-1. Restore the daily market-cap panel so the risk model can run proper
-   sqrt(market_cap) weighted cross-sectional regressions.
+1. Extend the restored market-cap-ready subset toward full-universe coverage so
+   the risk model can run proper sqrt(market_cap) weighted cross-sectional
+   regressions without coverage gating.
 2. Run factor ablations across the six price factors, including leave-one-out
    and reduced low-volatility variants, to identify value-destroying inputs.
 3. Reduce Pillar 5 neutralization intensity and add no-trade bands or turnover

@@ -1,6 +1,13 @@
 """Portfolio construction and evaluation utilities."""
 
 from src.portfolio.costs import apply_linear_transaction_costs, summarize_net_returns
+from src.portfolio.factor_interactions import (
+    factor_correlation_matrix,
+    factor_exposure_summary,
+    orthogonalize_factor,
+    pca_factor_diagnostics,
+    rolling_factor_correlation,
+)
 from src.portfolio.capacity import (
     borrow_feasible_flag,
     compute_participation,
@@ -46,6 +53,8 @@ __all__ = [
     "ImplementationBacktestResult",
     "apply_linear_transaction_costs",
     "factor_residual_decomposition",
+    "factor_correlation_matrix",
+    "factor_exposure_summary",
     "borrow_feasible_flag",
     "backtest_from_weights",
     "backtest_rebalanced_deciles",
@@ -59,6 +68,8 @@ __all__ = [
     "compute_turnover_impact_cost",
     "decompose_turnover",
     "portfolio_ex_ante_beta",
+    "orthogonalize_factor",
+    "pca_factor_diagnostics",
     "annualized_volatility",
     "drawdown_events",
     "drawdown_series",
@@ -71,6 +82,7 @@ __all__ = [
     "summarize_net_returns",
     "summarize_return_stream",
     "top_short_concentration",
+    "rolling_factor_correlation",
     "rolling_realized_beta",
     "sector_active_pnl",
     "sector_net_exposures",

@@ -1,0 +1,23 @@
+{
+  "backtest_dir": "results\\market_cap_ready_attribution\\backtest",
+  "weights": "results\\market_cap_ready_attribution\\weights.parquet",
+  "factor_data": "results\\market_cap_ready_attribution\\factors.parquet",
+  "returns": "results\\market_cap_ready_attribution\\prices.parquet",
+  "market_caps": "results\\market_cap_ready_attribution\\daily_fundamentals.parquet",
+  "market_cap_contract": "results\\market_cap_ready_attribution\\daily_fundamentals_contract.json",
+  "market_cap_source": "daily fundamentals market_cap column",
+  "sector_map": "data\\raw\\ticker_sector_map.parquet",
+  "output": "results\\market_cap_ready_attribution\\strategy_reports",
+  "start_date": "2014-01-02",
+  "end_date": "2024-12-31",
+  "n_dates": 2768,
+  "n_stocks": 416,
+  "factor_names": [
+    "momentum_12_1",
+    "short_term_reversal",
+    "week_52_high",
+    "idiosyncratic_vol",
+    "beta_inverse",
+    "realized_vol"
+  ]
+}

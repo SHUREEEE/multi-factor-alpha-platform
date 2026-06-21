@@ -1,0 +1,29 @@
+stage: price
+factor_file: data/factor_data/all_factors.parquet
+price_file: data/processed/prices.parquet
+weights_file: results/pillar5_artifacts/v3_weights.parquet
+daily_returns_file: results/pillar5_artifacts/v3_daily_returns.parquet
+output_dir: results/institutional_validation
+report_file: reports/institutional_validation.md
+
+factor_names:
+  - momentum_12_1
+  - short_term_reversal
+  - week_52_high
+  - idiosyncratic_vol
+  - beta_inverse
+  - realized_vol
+
+ic_periods: [1, 5, 10, 21, 63]
+rolling_ic_windows: [63, 126, 252]
+n_quantiles: 10
+nw_lags: 5
+train_years: 5
+test_years: 1
+min_train_days: 252
+min_test_days: 126
+
+capacity:
+  aum_usd: [25000000, 50000000, 100000000, 250000000]
+  gross: 1.5
+  impact_coefficients: [0.1, 0.5, 1.0]

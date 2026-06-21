@@ -40,7 +40,7 @@ is delivered, schema-validated, freshness-monitored, and run through the PB
 dry-run and launch evidence bundle. That is not a cosmetic blocker; it is a
 real production boundary.
 
-## Your fundamentals file is empty. Why not fake or approximate it?
+## Your full-universe fundamentals coverage is incomplete. Why not fake or approximate it?
 
 Because market-cap data is a contract for the attribution claim. If I do not
 have a positive daily market-cap panel, I should not publish sqrt-market-cap
@@ -59,7 +59,8 @@ gross/net PnL preservation.
 ## If you had one week to improve v1, what would you do?
 
 I would make the work evidence-first rather than just tune the backtest. First,
-restore the market-cap panel so attribution can run without fallback. Second,
+use the restored 416-name market-cap-ready subset for no-fallback attribution
+and add a fuller historical fundamentals vendor for the full universe. Second,
 run leave-one-out factor ablations to remove inputs that increase turnover
 without improving gross alpha. Third, compare no-trade bands and turnover
 penalties against gross-signal preservation and net implementation drag. If the

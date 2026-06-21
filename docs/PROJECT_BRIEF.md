@@ -24,9 +24,10 @@ risk attribution, and production-style launch controls.
    85.6x annual turnover, so the project freezes that result and explains why
    the portfolio construction layer is leaking value.
 3. It blocks unsupported claims. Barra-style attribution requires a positive
-   market-cap panel; when that panel is unavailable, the reporting path fails
-   closed instead of publishing an equal-cap fallback as if it were a real
-   Barra report.
+   market-cap panel; when full-universe coverage is insufficient, the reporting
+   path fails closed instead of publishing an equal-cap fallback. A separate
+   416-name market-cap-ready subset now passes the real-market-cap contract and
+   runs attribution without fallback.
 4. It includes a production-engineering candidate layer. V4 adds acceptance
    gates, replay evidence, data-integrity checks, drawdown halts, borrow
    constraints, kill-switch runbooks, and a machine-readable launch
@@ -38,7 +39,7 @@ risk attribution, and production-style launch controls.
 | --- | --- |
 | Core backtest | `results/backtest/metrics.json` |
 | Research narrative decision | `reports/pillar6_7_narrative_pivot.md` |
-| Attribution quarantine | `reports/pillar6_7_attribution_quarantine.md` |
+| Attribution quarantine and restoration | `reports/pillar6_7_attribution_quarantine.md`, `reports/market_cap_attribution_restoration.md` |
 | V4 acceptance gates | `reports/v4_acceptance_gate.md` |
 | V4 fixed time-split validation | `results/v4_walk_forward/walk_forward_report.md` |
 | V4 parameter-selected walk-forward | `results/v4_walk_forward_selection_full/v4_walk_forward_selection_report.md` |
@@ -93,8 +94,10 @@ and a `READY` launch evidence bundle.
 ## What Not To Claim
 
 - Do not claim the strategy is live-ready.
-- Do not claim publishable Barra attribution until the market-cap panel is
-  restored.
+- Do not claim full-universe publishable Barra attribution until the full
+  market-cap panel reaches the coverage contract.
+- Do claim only the documented 416-name market-cap-ready subset attribution
+  when discussing restored no-fallback Barra attribution.
 - Do not treat equal-market-cap fallback attribution as a production result.
 - Do not treat v4 acceptance gates as out-of-sample proof by themselves.
 - Do not hide v1's weak net Sharpe or high turnover.
@@ -103,16 +106,14 @@ and a `READY` launch evidence bundle.
 
 The next highest-value work is:
 
-1. Restore a real daily market-cap and fundamentals panel using the contract in
-   `docs/fundamentals_contract.md` and the import workflow in
-   `docs/fundamentals_ingestion_guide.md`.
-2. Rerun sqrt(market_cap) WLS attribution without fallback.
-3. Extend `scripts/run_v4_walk_forward_selection.py` from replay-scaffold
+1. Add a more complete historical fundamentals vendor to lift the full
+   516-name universe above the 95% daily market-cap coverage contract.
+2. Extend `scripts/run_v4_walk_forward_selection.py` from replay-scaffold
    parameter selection into a full retraining walk-forward study.
-4. Promote the leave-one-out factor ablation into the V4 optimizer loop,
+3. Promote the leave-one-out factor ablation into the V4 optimizer loop,
    especially reviewing `week_52_high`.
-5. Compare turnover penalties and no-trade bands against implementation drag.
-6. Wire a real PB borrow feed and rerun the launch evidence bundle.
+4. Compare turnover penalties and no-trade bands against implementation drag.
+5. Wire a real PB borrow feed and rerun the launch evidence bundle.
 
 ## Interview Framing
 

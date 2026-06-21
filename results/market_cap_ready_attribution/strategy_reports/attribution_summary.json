@@ -1,0 +1,33 @@
+{
+  "total_return": 0.4751685347967509,
+  "gross_total_return": 0.4751685347967509,
+  "factor_contribution_total": 0.40240197424159946,
+  "pure_alpha_total": 0.07276656055515131,
+  "pure_alpha_gross_total": 0.07276656055515131,
+  "transaction_cost_total": 0.0,
+  "pure_alpha_pct_of_total": 0.15313842400418318,
+  "factor_contribution_breakdown": {
+    "momentum_12_1": -0.05862234849488275,
+    "short_term_reversal": 0.014073688694164296,
+    "week_52_high": 0.3992265826955985,
+    "idiosyncratic_vol": -0.16221771322338394,
+    "beta_inverse": -0.03759688734402394,
+    "realized_vol": 0.24753865191412727
+  },
+  "risk_decomposition": {
+    "factor_variance": 1.8539790454524362e-05,
+    "idiosyncratic_variance": 6.9436896051093015e-06,
+    "total_variance": 2.5483480059633663e-05,
+    "factor_pct": 0.727521924444368,
+    "idio_pct": 0.27247807555563197,
+    "per_factor_variance": {
+      "momentum_12_1": 2.5566375275035015e-06,
+      "short_term_reversal": 4.339706566462917e-06,
+      "week_52_high": 1.5873796373293576e-05,
+      "idiosyncratic_vol": 0.00030415616519149994,
+      "beta_inverse": 1.6781160381456607e-10,
+      "realized_vol": 0.0002677652815125092
+    }
+  },
+  "risk_date": "2024-12-31"
+}

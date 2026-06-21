@@ -1,0 +1,90 @@
+{
+  "requested": 97,
+  "downloaded": 496,
+  "missing": [
+    {
+      "ticker": "ABNB",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "BK",
+      "reason": "missing_cik"
+    },
+    {
+      "ticker": "CVNA",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "DASH",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "EL",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "ERIE",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "HRL",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "LEN",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "META",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "MKC",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "MSTR",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "QQQ",
+      "reason": "download_failed"
+    },
+    {
+      "ticker": "RL",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "SPY",
+      "reason": "download_failed"
+    },
+    {
+      "ticker": "STZ",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "TAP",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "TKO",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "TSN",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "TTD",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "UHS",
+      "reason": "missing_shares_outstanding"
+    },
+    {
+      "ticker": "XYZ",
+      "reason": "missing_shares_outstanding"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "version": "v2 Institutional Research Validation Pack",
+  "output_dir": "results\\institutional_validation",
+  "price_only_default": true,
+  "fundamentals_status": "full_universe_coverage_gated; market_cap_ready_subset_restored_without_equal_cap_fallback",
+  "market_cap_ready_attribution": "results/market_cap_ready_attribution",
+  "factor_count": 6
+}
