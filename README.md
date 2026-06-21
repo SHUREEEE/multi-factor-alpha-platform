@@ -1,9 +1,7 @@
 # Multi-Factor Alpha Research & Risk Engineering Platform
 
-[![Python](https://img.shields.io/badge/python-3.10%2B-blue)](requirements.txt)
-[![Tests](https://img.shields.io/badge/tests-291%20passing-brightgreen)](#quick-start)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Status](https://img.shields.io/badge/status-research%20complete%2C%20live%20blocked-yellow)](results/v4_launch_go_no_go.json)
+**Python:** 3.10+ | **Tests:** 291 passing | **License:** MIT |
+**Status:** research complete, live launch blocked on validated PB borrow feed
 
 ## TL;DR
 
